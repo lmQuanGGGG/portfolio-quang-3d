@@ -6,8 +6,8 @@ export const profile = {
   bio: "Sinh viên tiêu biểu với tư duy lập trình sắc bén. Chuyên sâu về AI, Backend System và Mobile App. Luôn hướng tới các giải pháp công nghệ tối ưu và hiện đại.",
   // Thống kê ấn tượng
   stats: [
-    { label: "GPA", value: "3.38/4.0" },
-    { label: "Experience", value: "3+ Years" },
+    { label: "GPA", value: "3.41/4.0" },
+    { label: "Experience", value: "2+ Years" },
     { label: "Projects", value: "10+" },
     { label: "Certificates", value: "5" },
   ],
