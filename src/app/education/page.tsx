@@ -63,7 +63,7 @@ export default function EducationPage() {
                                 <h2 className="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors flex items-center gap-2">
                                     <Briefcase size={24} className="text-orange-500"/> FPT IS (FPT Information System)
                                 </h2>
-                                <p className="text-gray-400 text-lg">Thực tập sinh Lập trình di động</p>
+                                <p className="text-gray-400 text-lg">Mobile Developer Intern</p>
                             </div>
                             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-sm font-mono text-orange-300">
                                 <Calendar size={14} />
