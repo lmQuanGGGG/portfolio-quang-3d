@@ -93,9 +93,9 @@ export default function EducationPage() {
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                             <div>
                                 <h2 className="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">
-                                    Đại học Công nghệ TP.HCM
+                                    Ho Chi Minh City University of Technology
                                 </h2>
-                                <p className="text-gray-400 text-lg">Chuyên ngành Công nghệ phần mềm</p>
+                                <p className="text-gray-400 text-lg">Software Engineering Major</p>
                             </div>
                             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-gray-300">
                                 <Calendar size={14} />
@@ -111,7 +111,7 @@ export default function EducationPage() {
                                         <Star size={20} className="text-yellow-400" fill="currentColor" />
                                         <p className="text-xs text-gray-500 uppercase tracking-wider">GPA Hiện tại</p>
                                     </div>
-                                    <p className="text-3xl font-bold text-white">3.38 <span className="text-lg text-gray-500 font-normal">/ 4.0</span></p>
+                                    <p className="text-3xl font-bold text-white">3.41 <span className="text-lg text-gray-500 font-normal">/ 4.0</span></p>
                                 </div>
                                 
                                 <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
@@ -173,9 +173,9 @@ export default function EducationPage() {
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
                             <div>
                                 <h2 className="text-2xl font-bold text-white group-hover:text-gray-300 transition-colors flex items-center gap-2">
-                                    <School size={24} /> THPT Vĩnh Linh
+                                    <School size={24} /> Vinh Linh High School
                                 </h2>
-                                <p className="text-gray-400 text-lg">Học sinh Trung học phổ thông</p>
+                                <p className="text-gray-400 text-lg">High School Student</p>
                             </div>
                             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-gray-300">
                                 <Calendar size={14} />
