@@ -4,7 +4,7 @@ import Scene3D from "@/components/Scene3D";
 import { profile, blogPosts } from "./data";
 import { Github, Code2, Award, ArrowDown, ExternalLink, User, Cpu, Database, Smartphone, Terminal, BookOpen } from "lucide-react";
 import SciFiCarousel from "@/components/SciFiCarousel";
-import Link from "next/link"; // Import Link để chuyển trang blog
+import Link from "next/link"; 
 
 // --- COMPONENT HIỆU ỨNG ---
 function Reveal({ children, delay = 0, width = "100%" }: { children: React.ReactNode, delay?: number, width?: "100%" | "auto" }) {
@@ -38,20 +38,19 @@ export default function Home() {
 
       <div className="relative z-10">
         
-        {/* --- SECTION 1: HERO (NEW LAYOUT) --- */}
+        {/* --- SECTION 1: HERO --- */}
         <section className="min-h-screen flex flex-col justify-center px-4 pt-32 pb-20 overflow-hidden">
           <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* CỘT TRÁI: ẢNH CHÂN DUNG 3:4 */}
             <div className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-end">
                 <Reveal delay={0.2}>
-                    <div className="relative w-64 md:w-80 lg:w-96 aspect-[3/4] group">
+                    <div className="relative w-64 md:w-80 lg:w-96 aspect-[3/4] group mx-auto lg:mx-0">
                         {/* Viền Neon phía sau */}
                         <div className="absolute -inset-1 bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
                         
                         {/* Khung ảnh */}
                         <div className="relative h-full w-full rounded-3xl overflow-hidden border border-white/10 bg-gray-900 shadow-2xl">
-                            {/* Thay đường dẫn ảnh của bạn vào đây */}
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img 
                                 src="/hero-portrait.jpg" 
@@ -59,12 +58,11 @@ export default function Home() {
                                 className="w-full h-full object-cover scale-105 group-hover:scale-110 transition duration-700" 
                             />
                             
-                            {/* Lớp phủ gradient nhẹ bên dưới ảnh */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                         </div>
 
                         {/* Floating Badge */}
-                        <div className="absolute -bottom-6 -right-6 p-4 bg-black/80 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow">
+                        <div className="absolute -bottom-6 -right-6 p-4 bg-black/80 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
                             <div className="relative">
                                 <div className="w-3 h-3 bg-green-500 rounded-full animate-ping absolute opacity-75"></div>
                                 <div className="w-3 h-3 bg-green-500 rounded-full relative"></div>
@@ -80,14 +78,14 @@ export default function Home() {
               <ParallaxText yProgress={scrollYProgress} speed={-1}>
                 <div className="space-y-6">
                   <Reveal delay={0.1}>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition cursor-default">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition cursor-default mx-auto lg:mx-0">
                       <span className="text-sm font-medium text-gray-300">System Online • Ready to Deploy</span>
                     </div>
                   </Reveal>
 
                   <Reveal delay={0.2}>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-2">
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient-x block">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-normal mb-4 leading-relaxed py-2">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient-x block pb-1">
                         {profile.name}
                       </span>
                     </h1>
@@ -99,11 +97,10 @@ export default function Home() {
                     </p>
                   </Reveal>
 
-                  {/* Stats Grid - Thu nhỏ lại chút cho cân đối layout mới */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8 max-w-2xl mx-auto lg:mx-0">
                     {profile.stats.map((stat, i) => (
                       <Reveal key={i} delay={0.4 + i * 0.1}>
-                        <div className="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-purple-500/50 transition-all hover:-translate-y-1">
+                        <div className="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-purple-500/50 transition-all hover:-translate-y-1 flex flex-col items-center justify-center h-full">
                           <div className="text-xl md:text-2xl font-bold text-white">{stat.value}</div>
                           <div className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500">{stat.label}</div>
                         </div>
@@ -133,15 +130,14 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <Reveal>
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold flex items-center gap-3 mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold flex items-center justify-center lg:justify-start gap-3 mb-6">
                   <User className="text-cyan-400" size={48}/> 
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">About Profile</span>
                 </h2>
-                <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
+                <div className="space-y-6 text-gray-300 text-lg leading-relaxed text-center lg:text-left">
                   <p className="p-6 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm">
                     "👋 Xin chào! Tôi là <strong className="text-white">Lê Minh Quang</strong>. 
-                    Trong kỷ nguyên AI, tôi định vị mình là một Code Architect thế hệ mới. Thay vì chỉ gõ từng dòng lệnh, tôi tập trung vào nghệ thuật <span className="text-purple-400">'Prompt Engineering'</span> — chuyển hóa ngôn ngữ tự nhiên thành các module phần mềm phức tạp với tốc độ và độ chính xác vượt trội. 
-                    Tôi tin rằng sự cộng hưởng giữa tư duy lập trình và sức mạnh AI chính là tương lai của ngành công nghiệp này."
+                    Trong kỷ nguyên AI, tôi định vị mình là một Code Architect thế hệ mới. Thay vì chỉ gõ từng dòng lệnh, tôi tập trung vào nghệ thuật <span className="text-purple-400">'Prompt Engineering'</span> — chuyển hóa ngôn ngữ tự nhiên thành các module phần mềm phức tạp với tốc độ và độ chính xác vượt trội."
                   </p>
                   <p>
                     Hiện tại, tôi đang tập trung nghiên cứu sâu về <strong>Prompt Engineering</strong> và tích hợp các mô hình AI vào ứng dụng thực tế (Mobile & Web) để giải quyết các vấn đề phức tạp.
@@ -152,13 +148,13 @@ export default function Home() {
 
             <div>
               <Reveal delay={0.2}>
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <h3 className="text-2xl font-bold mb-6 flex items-center justify-center lg:justify-start gap-2">
                   <Cpu className="text-purple-500"/> Technical Arsenal
                 </h3>
               </Reveal>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Skill Groups */}
+                {/* Skill Groups - Đã xóa các class căn giữa (justify-center, text-center) */}
                 <Reveal delay={0.3}>
                   <div className="p-5 bg-gradient-to-br from-purple-900/20 to-black border border-purple-500/20 rounded-2xl hover:border-purple-500/50 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
@@ -227,11 +223,11 @@ export default function Home() {
         <section className="py-20 px-4 max-w-7xl mx-auto border-t border-white/5">
           <Reveal>
             <div className="mb-16 text-center md:text-left pt-10">
-              <h2 className="text-4xl md:text-5xl font-bold flex flex-col md:flex-row items-center gap-3 mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 mb-4">
                 <Code2 className="text-pink-500" size={48}/> 
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">Featured Projects</span>
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl">Các dự án trọng điểm. Triển khai công nghệ AI và Mobile hiệu năng cao.</p>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto md:mx-0 text-center md:text-left">Các dự án trọng điểm. Triển khai công nghệ AI và Mobile hiệu năng cao.</p>
             </div>
           </Reveal>
 
