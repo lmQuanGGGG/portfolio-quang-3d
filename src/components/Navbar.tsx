@@ -2,11 +2,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, BookOpen, Mail, GraduationCap } from "lucide-react"; // Thêm icon GraduationCap
+import { Home, BookOpen, Mail, GraduationCap, Briefcase } from "lucide-react"; // Thêm icon Briefcase
 
 const navItems = [
   { name: "Home", path: "/", icon: Home },
-  { name: "Education", path: "/education", icon: GraduationCap }, // Thêm mục này
+  { name: "Services", path: "/services", icon: Briefcase }, // Thêm mục này
+  { name: "Education", path: "/education", icon: GraduationCap },
   { name: "Blog", path: "/blog", icon: BookOpen },
   { name: "Contact", path: "/contact", icon: Mail },
 ];
@@ -38,7 +39,6 @@ export default function Navbar() {
               )}
               <item.icon size={16} />
               <span className="relative z-10 hidden md:inline">{item.name}</span>
-              {/* Mobile chỉ hiện icon, Desktop hiện cả tên */}
               <span className="relative z-10 md:hidden">{isActive ? item.name : ""}</span>
             </Link>
           );
