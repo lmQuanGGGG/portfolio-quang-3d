@@ -154,7 +154,7 @@ export default function ContactPage() {
                             text="Xem CV (PDF)" 
                             icon={FileText} 
                             label="Curriculum Vitae" 
-                            href="/EL-CV-Fresher Software Developer.pdf" 
+                            href="/EL-CV-Fresher Software Engineer.pdf" 
                             target="_blank"
                         />
                         
