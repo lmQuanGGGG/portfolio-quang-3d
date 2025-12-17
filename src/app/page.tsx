@@ -131,11 +131,12 @@ export default function Home() {
                 </h2>
                 <div className="space-y-6 text-gray-300 text-lg leading-relaxed text-center lg:text-left">
                   <p className="p-6 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm">
-                    "👋 Xin chào! Tôi là <strong className="text-white">Lê Minh Quang</strong>.
-                    Trong kỷ nguyên AI, tôi định vị mình là một Code Architect thế hệ mới. Thay vì chỉ gõ từng dòng lệnh, tôi tập trung vào nghệ thuật <span className="text-purple-400">'Prompt Engineering'</span> — chuyển hóa ngôn ngữ tự nhiên thành các module phần mềm phức tạp với tốc độ và độ chính xác vượt trội."
+                    "👋 Tôi là <strong className="text-white">Lê Minh Quang</strong> — Lập trình viên Mobile & Web.
+                    Phương châm của tôi: <span className="text-purple-400">"Vững cốt lõi, giỏi công cụ"</span>."
                   </p>
                   <p>
-                    Hiện tại, tôi đang tập trung nghiên cứu sâu về <strong>Prompt Engineering</strong> và tích hợp các mô hình AI vào ứng dụng thực tế (Mobile & Web) để giải quyết các vấn đề phức tạp.
+                    Tôi kết hợp kỹ năng lập trình chuyên sâu với <strong>Prompt Engineering</strong> để rút ngắn thời gian từ ý tưởng đến sản phẩm thực tế.
+                    Tôi không để AI viết code thay mình, mà dùng nó để đưa sản phẩm lên một tầm cao mới về hiệu suất và độ chính xác.
                   </p>
                 </div>
               </div>

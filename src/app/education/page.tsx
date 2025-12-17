@@ -76,7 +76,7 @@ export default function EducationPage() {
                             <p className="text-gray-300"><strong className="text-white">Địa điểm:</strong> FPT IS, Đường Sáng Tạo, KCX Tân Thuận, Quận 7, HCM</p>
                             <div className="p-4 rounded-xl bg-white/5 border border-white/10 mt-4">
                                 <p className="text-sm text-gray-400 italic">
-                                    "Tham gia phát triển các dự án phần mềm thực tế, làm việc trực tiếp với quy trình chuyên nghiệp tại tập đoàn công nghệ hàng đầu Việt Nam."
+                                    "Tham gia phát triển các dự án phần mềm thực tế Mobile CMS for Super App, làm việc trực tiếp với quy trình chuyên nghiệp tại tập đoàn công nghệ hàng đầu Việt Nam."
                                 </p>
                             </div>
                         </div>
@@ -194,7 +194,7 @@ export default function EducationPage() {
                         <div className="flex items-start gap-3 mt-4 p-4 rounded-2xl bg-white/5 border border-white/10">
                             <Award size={20} className="text-yellow-400 shrink-0 mt-1" />
                             <div>
-                                <p className="font-bold text-white">Đạt giải nhì Học sinh giỏi Tin học cấp Huyện</p>
+                                <p className="font-bold text-white">Đạt giải nhì Học sinh giỏi Tin học cấp Tỉnh</p>
                                 <p className="text-sm text-gray-400">Đạt thành tích xuất sắc trong suốt quá trình tham gia cuộc thi.</p>
                             </div>
                         </div>

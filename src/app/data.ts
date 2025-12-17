@@ -66,7 +66,7 @@ export const profile = {
       title: "GameNect",
       desc: "Mạng xã hội dành riêng cho game thủ (Mobile App)",
       tech: "Flutter, UI/UX, Backend API",
-      link: "https://github.com/lmQuanGGGG/GameNect",
+      link: "https://gamenect-web.vercel.app/",
       color: "from-blue-500 to-cyan-500"
     },
     {
@@ -80,7 +80,7 @@ export const profile = {
       title: "QConcert",
       desc: "Nền tảng săn vé sự kiện trực tuyến",
       tech: ".NET, High Performance",
-      link: "https://github.com/lmQuanGGGG/Qconcert",
+      link: "https://qconcert.vercel.app/",
       color: "from-orange-500 to-red-500"
     }
   ]
