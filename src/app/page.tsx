@@ -1,8 +1,8 @@
 "use client";
 import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-motion";
 import Scene3D from "@/components/Scene3D";
-import { profile, blogPosts } from "./data";
-import { Github, Code2, Award, ArrowDown, ExternalLink, User, Cpu, Database, Smartphone, Terminal, BookOpen } from "lucide-react";
+import { profile } from "./data";
+import { Github, Code2, Award, ArrowDown, ExternalLink, User, Cpu, Database, Smartphone, Terminal, Briefcase, Layers, ShieldCheck, Mail, Rocket } from "lucide-react";
 import SciFiCarousel from "@/components/SciFiCarousel";
 import Link from "next/link";
 
@@ -88,7 +88,7 @@ export default function Home() {
 
                   <Reveal delay={0.3}>
                     <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto lg:mx-0">
-                      {profile.role} • <span className="text-white">AI Enthusiast</span> • Mobile Developer
+                      {profile.role} • <span className="text-white">TypeScript</span> • Super App Platform
                     </p>
                   </Reveal>
 
@@ -111,6 +111,9 @@ export default function Home() {
                       <a href="https://github.com/lmQuanGGGG" target="_blank" className="px-8 py-3 bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition flex items-center gap-2 backdrop-blur-md">
                         <Github size={20} /> GitHub
                       </a>
+                      <a href="/EL-CV-Fresher Software Engineer.pdf" target="_blank" className="px-8 py-3 bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition flex items-center gap-2 backdrop-blur-md">
+                        CV
+                      </a>
                     </div>
                   </Reveal>
                 </div>
@@ -131,12 +134,12 @@ export default function Home() {
                 </h2>
                 <div className="space-y-6 text-gray-300 text-lg leading-relaxed text-center lg:text-left">
                   <p className="p-6 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm">
-                    "👋 Tôi là <strong className="text-white">Lê Minh Quang</strong> — Lập trình viên Mobile & Web.
-                    Phương châm của tôi: <span className="text-purple-400">"Vững cốt lõi, giỏi công cụ"</span>."
+                    "👋 Tôi là <strong className="text-white">Lê Minh Quang</strong> — Software Engineer tập trung vào kiến trúc Mini App cho Super App.
+                    Tôi ưu tiên hệ thống <span className="text-purple-400">ổn định, mở rộng tốt và tối ưu trải nghiệm thực thi</span>."
                   </p>
                   <p>
-                    Tôi kết hợp kỹ năng lập trình chuyên sâu với <strong>Prompt Engineering</strong> để rút ngắn thời gian từ ý tưởng đến sản phẩm thực tế.
-                    Tôi không để AI viết code thay mình, mà dùng nó để đưa sản phẩm lên một tầm cao mới về hiệu suất và độ chính xác.
+                    Tại FPT IS, tôi xây dựng web quản lý Mini App cho Lightbase và tham gia tối ưu app Lightbase theo hướng hybrid.
+                    Trọng tâm công việc là TypeScript architecture, đồng bộ phân phối bất đồng bộ, RBAC bảo mật và tối ưu bridge WebView để giảm độ trễ.
                   </p>
                 </div>
               </div>
@@ -155,13 +158,13 @@ export default function Home() {
                   <div className="p-5 bg-gradient-to-br from-purple-900/20 to-black border border-purple-500/20 rounded-2xl hover:border-purple-500/50 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 bg-purple-500/20 rounded-lg text-purple-400"><Cpu size={20} /></div>
-                      <h4 className="font-bold">AI & Backend</h4>
+                      <h4 className="font-bold">Core Architecture</h4>
                     </div>
                     <ul className="space-y-2 text-sm text-gray-400">
-                      <li>• Prompt Engineering</li>
-                      <li>• Python (Flask/FastAPI)</li>
-                      <li>• .NET Core / C#</li>
-                      <li>• Next.js (App Router)</li>
+                      <li>• TypeScript domain modeling</li>
+                      <li>• Modular component architecture</li>
+                      <li>• Next.js App Router</li>
+                      <li>• Lifecycle state orchestration</li>
                     </ul>
                   </div>
                 </Reveal>
@@ -170,13 +173,13 @@ export default function Home() {
                   <div className="p-5 bg-gradient-to-br from-blue-900/20 to-black border border-blue-500/20 rounded-2xl hover:border-blue-500/50 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400"><Smartphone size={20} /></div>
-                      <h4 className="font-bold">Mobile & Frontend</h4>
+                      <h4 className="font-bold">Hybrid Runtime</h4>
                     </div>
                     <ul className="space-y-2 text-sm text-gray-400">
-                      <li>• Flutter (Dart)</li>
+                      <li>• React Native Super App shell</li>
+                      <li>• SvelteKit integration layer</li>
+                      <li>• WebView rendering optimization</li>
                       <li>• React Native</li>
-                      <li>• Tailwind CSS</li>
-                      <li>• UI/UX Design (Figma)</li>
                     </ul>
                   </div>
                 </Reveal>
@@ -185,13 +188,13 @@ export default function Home() {
                   <div className="p-5 bg-gradient-to-br from-green-900/20 to-black border border-green-500/20 rounded-2xl hover:border-green-500/50 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 bg-green-500/20 rounded-lg text-green-400"><Database size={20} /></div>
-                      <h4 className="font-bold">Data & DevOps</h4>
+                      <h4 className="font-bold">Backend & Distribution</h4>
                     </div>
                     <ul className="space-y-2 text-sm text-gray-400">
-                      <li>• MongoDB / MSSQL</li>
-                      <li>• Docker & CI/CD</li>
-                      <li>• Git / GitHub Actions</li>
-                      <li>• Networking Basics</li>
+                      <li>• Encore async workflows</li>
+                      <li>• Storage & sync pipelines</li>
+                      <li>• Mini App deploy automation</li>
+                      <li>• Monitoring and release safety</li>
                     </ul>
                   </div>
                 </Reveal>
@@ -200,13 +203,13 @@ export default function Home() {
                   <div className="p-5 bg-gradient-to-br from-orange-900/20 to-black border border-orange-500/20 rounded-2xl hover:border-orange-500/50 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 bg-orange-500/20 rounded-lg text-orange-400"><Terminal size={20} /></div>
-                      <h4 className="font-bold">Soft Skills</h4>
+                      <h4 className="font-bold">Security & Governance</h4>
                     </div>
                     <ul className="space-y-2 text-sm text-gray-400">
-                      <li>• Problem Solving</li>
-                      <li>• Teamwork & Leadership</li>
-                      <li>• English for IT 2</li>
-                      <li>• Agile / Scrum basics</li>
+                      <li>• Auth strategy design</li>
+                      <li>• RBAC permission matrix</li>
+                      <li>• Data integrity controls</li>
+                      <li>• Cross-team technical alignment</li>
                     </ul>
                   </div>
                 </Reveal>
@@ -215,7 +218,128 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- SECTION 3: PROJECTS --- */}
+        {/* --- SECTION 3: EXPERIENCE --- */}
+        <section id="experience" className="py-20 px-4 max-w-7xl mx-auto border-t border-white/5">
+          <Reveal>
+            <div className="mb-12 text-center md:text-left pt-10">
+              <h2 className="text-4xl md:text-5xl font-bold flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 mb-4">
+                <Briefcase className="text-cyan-400" size={48} />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">Professional Experience</span>
+              </h2>
+              <p className="text-gray-400 text-lg max-w-3xl mx-auto md:mx-0">
+                FPT IS • Lightbase ecosystem: xây dựng nền tảng quản lý, kiểm thử, phân phối và vận hành Mini App trong Super App.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 via-black to-black p-8 md:p-10">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-white">Mini App Platform Engineer</h3>
+                  <p className="text-cyan-300">FPT IS • Lightbase Platform</p>
+                </div>
+                <span className="w-fit px-4 py-2 rounded-full text-sm border border-white/15 bg-white/5 text-gray-300">2025 - Present</span>
+              </div>
+
+              <div className="mb-6 p-5 rounded-2xl border border-white/10 bg-white/5">
+                <h4 className="font-semibold mb-3 text-white">3 sản phẩm trực tiếp triển khai tại FPT IS</h4>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  <li>• Lightbase Mini App Management - TypeScript, Modular Architecture, Encore</li>
+                  <li>• Mini App News - SvelteKit, TypeScript, Web App</li>
+                  <li>• Lightbase Super App - React Native, WebView, Hybrid Bridge</li>
+                </ul>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+                  <h4 className="font-semibold mb-3 flex items-center gap-2"><Layers size={18} className="text-cyan-400" /> Lifecycle Dashboard</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li>• Thiết kế hệ thống quản lý 4 module: Home, Test, Store, Profile.</li>
+                    <li>• Chuẩn hóa module theo kiến trúc component tái sử dụng bằng TypeScript.</li>
+                  </ul>
+                </div>
+
+                <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+                  <h4 className="font-semibold mb-3 flex items-center gap-2"><Database size={18} className="text-green-400" /> Backend & Sync Engine</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li>• Xây dựng luồng phân phối Mini App bất đồng bộ dựa trên Encore.</li>
+                    <li>• Thiết kế cơ chế đồng bộ dữ liệu và lưu trữ phục vụ triển khai quy mô lớn.</li>
+                  </ul>
+                </div>
+
+                <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+                  <h4 className="font-semibold mb-3 flex items-center gap-2"><ShieldCheck size={18} className="text-orange-400" /> Security (RBAC)</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li>• Thiết kế tầng xác thực và phân quyền Role-Based Access Control.</li>
+                    <li>• Đảm bảo toàn vẹn dữ liệu và tách quyền truy cập theo ngữ cảnh nghiệp vụ.</li>
+                  </ul>
+                </div>
+
+                <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+                  <h4 className="font-semibold mb-3 flex items-center gap-2"><Smartphone size={18} className="text-purple-400" /> Hybrid Optimization</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li>• Tinh chỉnh bridge SvelteKit-React Native và tối ưu lớp WebView.</li>
+                    <li>• Giảm độ trễ khi tải Mini App trong Super App shell trên thiết bị di động.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* --- SECTION 5: SERVICES & CONTACT --- */}
+        <section id="services-contact" className="py-20 px-4 max-w-7xl mx-auto border-t border-white/5">
+          <Reveal>
+            <div className="mb-12 text-center md:text-left pt-10">
+              <h2 className="text-4xl md:text-5xl font-bold flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 mb-4">
+                <Rocket className="text-blue-400" size={48} />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">Services & Contact</span>
+              </h2>
+              <p className="text-gray-400 text-lg max-w-3xl mx-auto md:mx-0">
+                Thiết kế và triển khai Web App, Landing Page và sản phẩm Web-Mobile cho hệ sinh thái Mini App, từ kiến trúc đến tối ưu vận hành production.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <Reveal delay={0.1}>
+              <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
+                <h3 className="font-bold text-lg mb-3">Web App & Landing Page</h3>
+                <p className="text-sm text-gray-400">Nhận thiết kế và phát triển Landing Page chuyển đổi cao, cùng Web App quản trị/CRM/dashboard tối ưu hiệu năng.</p>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
+                <h3 className="font-bold text-lg mb-3">Hybrid Performance</h3>
+                <p className="text-sm text-gray-400">Tối ưu React Native shell, bridge SvelteKit và WebView để giảm độ trễ khi mở Mini App.</p>
+              </div>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
+                <h3 className="font-bold text-lg mb-3">Security & Delivery</h3>
+                <p className="text-sm text-gray-400">Thiết kế Auth + RBAC và luồng phân phối bất đồng bộ giúp triển khai an toàn, nhất quán.</p>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.35}>
+            <div className="rounded-3xl border border-blue-500/20 bg-gradient-to-r from-blue-900/20 via-black to-cyan-900/20 p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Cần trao đổi dự án?</h3>
+                <p className="text-gray-400">Liên hệ trực tiếp để mình tư vấn solution phù hợp với mục tiêu sản phẩm của bạn.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/contact" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition">Open Contact Form</Link>
+                <a href="mailto:leminhquang2k4@gmail.com" className="px-6 py-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 transition flex items-center justify-center gap-2">
+                  <Mail size={16} /> Email Direct
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* --- SECTION 6: PROJECTS --- */}
         <section className="py-20 px-4 max-w-7xl mx-auto border-t border-white/5">
           <Reveal>
             <div className="mb-16 text-center md:text-left pt-10">
@@ -258,8 +382,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- SECTION 4: CERTIFICATES --- */}
-        <section className="py-20 bg-black overflow-hidden relative border-y border-white/5">
+        {/* --- SECTION 7: CERTIFICATES --- */}
+        <section id="certificates" className="py-20 bg-black overflow-hidden relative border-y border-white/5">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black z-0 pointer-events-none"></div>
           <div className="relative z-10 max-w-7xl mx-auto">
             <Reveal>

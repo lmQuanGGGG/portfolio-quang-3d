@@ -2,21 +2,21 @@
 
 export const profile = {
   name: "LÊ MINH QUANG",
-  role: "Software Engineer",
-  bio: "Sinh viên tiêu biểu với tư duy lập trình sắc bén. Chuyên sâu về AI, Backend System và Mobile App. Luôn hướng tới các giải pháp công nghệ tối ưu và hiện đại.",
-  // Thống kê ấn tượng
+    role: "Software Engineer • Mini App Ecosystem",
+    bio: "Kỹ sư phần mềm tập trung vào Web-Mobile platform cho hệ sinh thái Super App. Kinh nghiệm triển khai quản lý, phân phối và tối ưu Mini App trong môi trường hiệu năng cao tại FPT IS.",
   stats: [
-    { label: "GPA", value: "3.41/4.0" },
-    { label: "Experience", value: "2+ Years" },
-    { label: "Projects", value: "10+" },
-    { label: "Certificates", value: "5" },
+        { label: "Experience", value: "2+ Years" },
+        { label: "Mini App Modules", value: "4" },
+        { label: "Projects", value: "12+" },
+        { label: "Certificates", value: "5" },
   ],
   skills: [
-    "AI Prompt Engineering", 
-    "Backend (.NET, Python, NextJS)", 
-    "Database (MSSQL, MongoDB)", 
-    "Mobile (Flutter)", 
-    "DevOps (Docker, CI/CD)" 
+        "TypeScript Architecture",
+        "Mini App Lifecycle Management",
+        "Encore Async Workflows",
+        "RBAC & Auth Security",
+        "React Native + WebView Optimization",
+        "SvelteKit-React Native Bridge"
   ],
   // Dữ liệu từ các chứng chỉ (Link Credly chuẩn)
   certificates: [
@@ -62,6 +62,27 @@ export const profile = {
     }
   ],
   projects: [
+        {
+            title: "Lightbase Mini App Management",
+            desc: "Web platform quản lý và phân phối Mini App trong hệ sinh thái Lightbase (triển khai tại FPT IS)",
+            tech: "TypeScript, Modular Architecture, Encore",
+            link: "https://www.lightbase.space/",
+            color: "from-cyan-500 to-blue-500"
+        },
+        {
+            title: "Mini App News",
+            desc: "Nền tảng tin tức dành cho hệ sinh thái Mini App (triển khai tại FPT IS)",
+            tech: "SvelteKit, TypeScript, Web App",
+            link: "https://mini-app-news-fe.vercel.app/",
+            color: "from-indigo-500 to-sky-500"
+        },
+        {
+            title: "Lightbase Super App",
+            desc: "Ứng dụng Super App tích hợp Mini App với hiệu năng WebView tối ưu (triển khai tại FPT IS)",
+            tech: "React Native, WebView, Hybrid Bridge",
+            link: "https://play.google.com/store/apps/details?id=com.superapp.shell&hl=vi",
+            color: "from-emerald-500 to-cyan-500"
+        },
     {
       title: "GameNect",
       desc: "Mạng xã hội dành riêng cho game thủ (Mobile App)",
