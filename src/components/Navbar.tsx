@@ -13,16 +13,55 @@ const navItems = [
   { name: "Certificates", href: "/#certificates", icon: Award, hash: "#certificates" },
 ];
 
+const sectionHashes = navItems
+  .map((item) => item.hash)
+  .filter((hash): hash is string => hash.length > 0);
+
 export default function Navbar() {
   const pathname = usePathname();
   const [activeHash, setActiveHash] = useState("");
 
   useEffect(() => {
-    const syncHash = () => setActiveHash(window.location.hash);
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, []);
+    if (pathname !== "/") {
+      setActiveHash("");
+      return;
+    }
+
+    const sections = sectionHashes
+      .map((hash) => document.getElementById(hash.slice(1)))
+      .filter((section): section is HTMLElement => section !== null);
+
+    const syncActiveSection = () => {
+      if (sections.length === 0) {
+        setActiveHash(window.location.hash);
+        return;
+      }
+
+      const triggerLine = window.scrollY + window.innerHeight * 0.35;
+      let currentHash = "";
+
+      for (const section of sections) {
+        if (triggerLine >= section.offsetTop) {
+          currentHash = `#${section.id}`;
+        } else {
+          break;
+        }
+      }
+
+      setActiveHash(currentHash);
+    };
+
+    syncActiveSection();
+    window.addEventListener("scroll", syncActiveSection, { passive: true });
+    window.addEventListener("resize", syncActiveSection);
+    window.addEventListener("hashchange", syncActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", syncActiveSection);
+      window.removeEventListener("resize", syncActiveSection);
+      window.removeEventListener("hashchange", syncActiveSection);
+    };
+  }, [pathname]);
 
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
