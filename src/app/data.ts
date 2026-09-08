@@ -2,21 +2,46 @@
 
 export const profile = {
   name: "LÊ MINH QUANG",
-    role: "Software Engineer • Mini App Ecosystem",
-    bio: "Kỹ sư phần mềm tập trung vào Web-Mobile platform cho hệ sinh thái Super App. Kinh nghiệm triển khai quản lý, phân phối và tối ưu Mini App trong môi trường hiệu năng cao tại FPT IS.",
+  role: "Software Engineer • Full-stack, Mobile & Cloud",
+    bio: "Software Engineer with enterprise experience at FPT IS and hands-on delivery across C# (.NET 8), TypeScript, React, Flutter and Alibaba Cloud.",
   stats: [
-        { label: "Experience", value: "2+ Years" },
-        { label: "Mini App Modules", value: "4" },
-        { label: "Projects", value: "12+" },
-        { label: "Certificates", value: "5" },
+        { label: "Professional roles", value: "3" },
+        { label: "Mini Apps managed", value: "4" },
+        { label: "Core products", value: "4" },
+        { label: "Model ROC-AUC", value: "0.87" },
   ],
   skills: [
+        "Dart & Flutter",
+        "Python & FastAPI",
         "TypeScript Architecture",
         "Mini App Lifecycle Management",
         "Encore Async Workflows",
         "RBAC & Auth Security",
         "React Native + WebView Optimization",
         "SvelteKit-React Native Bridge"
+  ],
+  experience: [
+    {
+      company: "FPT IS",
+      period: "12/2025 - Nay|||12/2025 - Present",
+      role: "Lập trình viên phần mềm|||Software Developer",
+      project: "Lightbase Mini App Management CMS · VNEPS · eTrip",
+      description: "Phát triển hệ thống quản lý TypeScript dạng mô-đun cho vòng đời 4 Mini App và React Native (Expo) Super App shell; xây luồng phân phối backend, RBAC và ứng dụng AI Agents/MCP. Phát triển frontend responsive, component tái sử dụng cho VNEPS; bảo trì eTrip trong quá trình chuyển từ FIS Insight sang myFPT Next, sửa lỗi check-in và icon giao diện bị thiếu.|||Developed a modular TypeScript management system for the lifecycle of four Mini Apps and a React Native (Expo) Super App shell; built backend distribution workflows and RBAC with AI Agents/MCP. Delivered responsive reusable frontend modules for VNEPS and maintained eTrip during its FIS Insight-to-myFPT Next migration, fixing check-in failures and missing UI icons."
+    },
+    {
+      company: "TRIEU HY MEDIA COMPANY LIMITED",
+      period: "06/2026 - Nay|||06/2026 - Present",
+      role: "Lập trình viên Full-stack / Mobile & Cloud tự do|||Freelance Full-stack / Mobile & Cloud Developer",
+      project: "Zhaoxi · CocoDrama · Alibaba Cloud",
+      description: "Thiết kế trên Figma và phát triển Zhaoxi - nền tảng đặt hàng/dịch vụ trên web gồm luồng khách hàng và cổng đối tác quản lý, cấu hình cửa hàng. Hỗ trợ triển khai CocoDrama, phát hành mobile và xử lý lỗi release; cấu hình Alibaba Cloud OSS, VOD, CDN, RAM, DNS/domain và SSL; phối hợp trực tiếp với đội kỹ thuật Trung Quốc về yêu cầu ứng dụng, API, hạ tầng cloud và xử lý lỗi.|||Designed in Figma and developed Zhaoxi, a web ordering/service platform with customer flows and a partner portal for store configuration and management. Supported CocoDrama deployment, mobile publishing and release troubleshooting; configured Alibaba Cloud OSS, VOD, CDN, RAM, DNS/domain verification and SSL; collaborated directly with a China-based technical team on requirements, APIs, cloud infrastructure and bug resolution."
+    },
+    {
+      company: "Hynnie - TMTECH Lighting",
+      period: "07/2025 - 10/2025",
+      role: "Thực tập sinh Full-stack|||Full-stack Developer Intern",
+      project: "Hệ thống ERP nội bộ|||Internal ERP System",
+      description: "Hỗ trợ phát triển ERP nội bộ; triển khai CRUD, xác thực/phân quyền, tích hợp REST API, kiểm tra biểu mẫu và sửa lỗi bằng React, ASP.NET Core (.NET 8), C# và SQL Server.|||Supported an internal ERP and implemented CRUD, authentication/authorization, REST integrations, form validation and defect fixes using React, ASP.NET Core (.NET 8), C# and SQL Server."
+    },
   ],
   // Dữ liệu từ các chứng chỉ (Link Credly chuẩn)
   certificates: [
@@ -62,45 +87,80 @@ export const profile = {
     }
   ],
   projects: [
+    {
+      title: "StorePublish",
+      desc: "Nền tảng dịch vụ phát hành App Store/Google Play, phát triển web/mobile, CRM và AI automation.|||Digital-product delivery for app publishing, web, mobile, CRM and AI automation.",
+      tech: "Next.js, Product Operations, App Publishing",
+      link: "https://storepublish.space/",
+      color: "from-indigo-500 to-violet-500"
+    },
+    {
+      title: "TRIEU HY MEDIA",
+      desc: "Website doanh nghiệp giới thiệu giải pháp truyền thông thương hiệu, sản phẩm số và vận hành không gian làm việc tại Đà Nẵng.|||Corporate website presenting brand communication, digital products and workspace operations in Da Nang.",
+      tech: "Next.js, React, Responsive UI",
+      link: "https://trieuhymedia.net/vi",
+      color: "from-sky-500 to-indigo-500"
+    },
+    {
+      title: "ZhaoXi",
+      desc: "Nền tảng dịch vụ và đặt hàng phía khách hàng, được thiết kế trên Figma và phát triển thành trải nghiệm web hoàn chỉnh.|||Customer-facing service and ordering platform designed in Figma and developed as a complete web experience.",
+      tech: "Next.js, Figma, Customer Experience",
+      link: "https://zhaoxi.trieuhymedia.net/",
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      title: "ZhaoXi Partner Center",
+      desc: "Cổng dành cho đối tác quản lý cửa hàng, cấu hình dịch vụ và vận hành hoạt động kinh doanh trên ZhaoXi.|||Partner portal for store management, service configuration and ZhaoXi business operations.",
+      tech: "Next.js, Partner Portal, Store Management",
+      link: "https://partner.zhaoxi.trieuhymedia.net/",
+      color: "from-emerald-500 to-teal-500"
+    },
+    {
+      title: "AutoFarm",
+      desc: "SaaS tự động hóa mạng xã hội đa nền tảng, có log realtime, quota và cơ chế cô lập lỗi.|||AI-powered social automation SaaS with realtime logs, quotas and failure isolation.",
+      tech: "Next.js, Node.js, Puppeteer, Supabase",
+      link: "#",
+      color: "from-cyan-500 to-blue-500"
+    },
         {
             title: "Lightbase Mini App Management",
-            desc: "Web platform quản lý và phân phối Mini App trong hệ sinh thái Lightbase (triển khai tại FPT IS)",
-            tech: "TypeScript, Modular Architecture, Encore",
+            desc: "Hệ thống quản lý vòng đời, phân phối và RBAC cho 4 Mini App hybrid.|||Modular lifecycle, distribution and RBAC system for four hybrid Mini Apps.",
+            tech: "TypeScript, React Native, RBAC",
             link: "https://www.lightbase.space/",
             color: "from-cyan-500 to-blue-500"
         },
         {
             title: "Mini App News",
-            desc: "Nền tảng tin tức dành cho hệ sinh thái Mini App (triển khai tại FPT IS)",
+            desc: "Nền tảng tin tức dành cho hệ sinh thái Mini App tại FPT IS.|||News platform for the Mini App ecosystem at FPT IS.",
             tech: "SvelteKit, TypeScript, Web App",
             link: "https://mini-app-news-fe.vercel.app/",
             color: "from-indigo-500 to-sky-500"
         },
         {
             title: "Lightbase Super App",
-            desc: "Ứng dụng Super App tích hợp Mini App với hiệu năng WebView tối ưu (triển khai tại FPT IS)",
+            desc: "Super App tích hợp Mini App với WebView tối ưu tại FPT IS.|||Mini App Super App with optimized WebView performance.",
             tech: "React Native, WebView, Hybrid Bridge",
             link: "https://play.google.com/store/apps/details?id=com.superapp.shell&hl=vi",
             color: "from-emerald-500 to-cyan-500"
         },
     {
       title: "GameNect",
-      desc: "Mạng xã hội dành riêng cho game thủ (Mobile App)",
-      tech: "Flutter, UI/UX, Backend API",
+      desc: "Mạng xã hội AI cho hơn 1.000 người dùng với chat, media, calls và matching realtime.|||AI-powered social platform for 1,000+ users.",
+      tech: "Flutter, Firebase, Agora RTC",
       link: "https://gamenect-web.vercel.app/",
       color: "from-blue-500 to-cyan-500"
     },
     {
-      title: "AI Training System",
-      desc: "Hệ thống AI đề xuất kết nối người dùng cá nhân hóa",
-      tech: "Python, Docker, Data Analysis",
+      title: "GameNect Matching Engine",
+      desc: "Mô hình Gradient Boosting matching với dữ liệu hành vi lai, đạt ROC-AUC 0.87.|||Gradient Boosting matchmaking model with ROC-AUC 0.87.",
+      tech: "FastAPI, Scikit-learn, GitHub Actions",
       link: "https://github.com/lmQuanGGGG/gamenect_ai_training",
       color: "from-purple-500 to-pink-500"
     },
     {
       title: "QConcert",
-      desc: "Nền tảng săn vé sự kiện trực tuyến",
-      tech: ".NET, High Performance",
+      desc: "Nền tảng vé trực tuyến với booking transactional, ngăn trùng lặp.|||Online ticketing with transactional booking and duplicate-reservation protection.",
+      tech: "Next.js, ASP.NET Core, SQL Server",
       link: "https://qconcert.vercel.app/",
       color: "from-orange-500 to-red-500"
     }

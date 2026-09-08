@@ -1,97 +1,31 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Home, Mail, Briefcase, Award } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
-const navItems = [
-  { name: "Home", href: "/", icon: Home, hash: "" },
-  { name: "About", href: "/#about", icon: Briefcase, hash: "#about" },
-  { name: "Experience", href: "/#experience", icon: Briefcase, hash: "#experience" },
-  { name: "Services & Contact", href: "/#services-contact", icon: Mail, hash: "#services-contact" },
-  { name: "Certificates", href: "/#certificates", icon: Award, hash: "#certificates" },
+const links = [
+  ["Giới thiệu", "About", "/#about"],
+  ["Kinh nghiệm", "Experience", "/#experience"],
+  ["Dự án", "Work", "/#certificates"],
+  ["Dịch vụ", "Services", "/services"],
+  ["Liên hệ", "Contact", "/#services-contact"],
 ];
-
-const sectionHashes = navItems
-  .map((item) => item.hash)
-  .filter((hash): hash is string => hash.length > 0);
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [activeHash, setActiveHash] = useState("");
+  const { language, toggleLanguage } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const label = (vi: string, en: string) => language === "vi" ? vi : en;
 
-  useEffect(() => {
-    if (pathname !== "/") {
-      setActiveHash("");
-      return;
-    }
-
-    const sections = sectionHashes
-      .map((hash) => document.getElementById(hash.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-
-    const syncActiveSection = () => {
-      if (sections.length === 0) {
-        setActiveHash(window.location.hash);
-        return;
-      }
-
-      const triggerLine = window.scrollY + window.innerHeight * 0.35;
-      let currentHash = "";
-
-      for (const section of sections) {
-        if (triggerLine >= section.offsetTop) {
-          currentHash = `#${section.id}`;
-        } else {
-          break;
-        }
-      }
-
-      setActiveHash(currentHash);
-    };
-
-    syncActiveSection();
-    window.addEventListener("scroll", syncActiveSection, { passive: true });
-    window.addEventListener("resize", syncActiveSection);
-    window.addEventListener("hashchange", syncActiveSection);
-
-    return () => {
-      window.removeEventListener("scroll", syncActiveSection);
-      window.removeEventListener("resize", syncActiveSection);
-      window.removeEventListener("hashchange", syncActiveSection);
-    };
-  }, [pathname]);
-
-  return (
-    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-      <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="flex items-center gap-1 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full p-1.5 shadow-2xl"
-      >
-        {navItems.map((item) => {
-          const isActive = item.hash ? activeHash === item.hash : pathname === "/" && activeHash === "";
-          return (
-            <Link 
-              key={item.href} 
-              href={item.href}
-              className={`relative px-4 py-2.5 md:px-6 rounded-full flex items-center gap-2 text-sm font-medium transition-colors duration-300 ${isActive ? "text-white" : "text-gray-400 hover:text-white"}`}
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 bg-white/10 border border-white/20 rounded-full"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <item.icon size={16} />
-              <span className="relative z-10 hidden md:inline">{item.name}</span>
-              <span className="relative z-10 md:hidden">{isActive ? item.name : ""}</span>
-            </Link>
-          );
-        })}
-      </motion.nav>
-    </div>
-  );
+  return <header className="sticky inset-x-0 top-0 z-50 w-full max-w-[100vw] overflow-x-clip px-4 py-4 sm:px-8 sm:py-5">
+    <nav className="mx-auto flex w-[min(92vw,34rem)] items-center justify-between rounded-2xl border border-white/35 bg-white/18 px-4 py-3 shadow-[0_12px_40px_rgba(15,23,42,.14)] backdrop-blur-2xl sm:px-5 md:w-full md:max-w-7xl">
+      <Link href="/" className="text-sm font-semibold tracking-[-0.02em] text-slate-950">LMQ<span className="text-indigo-600">.</span></Link>
+      {pathname === "/" && <div className="hidden items-center gap-5 md:flex">{links.map(([vi, en, href]) => <Link key={href} href={href} className="text-sm text-slate-600 transition hover:text-slate-950">{label(vi, en)}</Link>)}</div>}
+      <div className="flex items-center gap-2"><button onClick={toggleLanguage} className="rounded-lg bg-white/55 px-2 py-2 text-[11px] font-bold text-slate-600 shadow-sm transition hover:bg-white hover:text-indigo-700">{language === "vi" ? "EN" : "VI"}</button><a href="mailto:leminhquang2k4@gmail.com" className="hidden rounded-xl bg-slate-950 px-3 py-2 text-xs font-medium text-white transition hover:bg-indigo-600 sm:block">{label("Liên hệ", "Contact")}</a>{pathname === "/" && <button onClick={() => setMenuOpen((open) => !open)} className="grid size-9 place-items-center rounded-xl bg-white/40 text-slate-800 transition hover:bg-white/70 md:hidden" aria-label="Toggle navigation">{menuOpen ? <X size={19} /> : <Menu size={20} />}</button>}</div>
+    </nav>
+    {pathname === "/" && menuOpen && <div className="mx-auto mt-2 w-[min(92vw,34rem)] rounded-2xl border border-white/35 bg-white/25 p-2 shadow-[0_16px_45px_rgba(15,23,42,.16)] backdrop-blur-2xl md:max-w-7xl">{links.map(([vi, en, href]) => <Link key={href} onClick={() => setMenuOpen(false)} href={href} className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-white/55 hover:text-slate-950">{label(vi, en)}</Link>)}<a href="mailto:leminhquang2k4@gmail.com" className="mt-1 block rounded-xl bg-slate-950 px-4 py-3 text-sm font-medium text-white">{label("Liên hệ", "Contact")}</a></div>}
+  </header>;
 }
