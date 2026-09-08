@@ -25,19 +25,14 @@ function SystemCore() {
     system.current.position.x = Math.sin(scroll * Math.PI) * 0.65;
     system.current.scale.setScalar(1 - scroll * 0.2);
   });
-
-  return <group ref={system}>
-    <Float speed={1.7} rotationIntensity={0.25} floatIntensity={0.65}>
-      <mesh ref={core}><icosahedronGeometry args={[1.15, 5]} /><MeshDistortMaterial color="#5666ef" roughness={0.15} metalness={0.3} distort={0.25} speed={1.65} /></mesh>
-      <mesh scale={1.025}><icosahedronGeometry args={[1.15, 2]} /><meshBasicMaterial color="#c7d2fe" wireframe transparent opacity={0.42} /></mesh>
-    </Float>
-    <group ref={orbit} rotation={[0.72, -0.45, 0.1]}>
-      <mesh><torusGeometry args={[1.72, 0.018, 12, 120]} /><meshBasicMaterial color="#94a3ff" transparent opacity={0.85} /></mesh>
-      <mesh rotation={[1.12, 0.65, 0.2]}><torusGeometry args={[2.2, 0.012, 12, 120]} /><meshBasicMaterial color="#2dd4bf" transparent opacity={0.7} /></mesh>
-      <Satellite position={[1.7, 0.02, 0]} color="#f59e0b" />
-      <Satellite position={[-1.42, -1.6, 0]} color="#14b8a6" />
-    </group>
-  </group>;
+  return <group ref={system}><Float speed={1.7} rotationIntensity={0.25} floatIntensity={0.65}>
+    <mesh ref={core}><icosahedronGeometry args={[1.15, 5]} /><MeshDistortMaterial color="#5666ef" roughness={0.15} metalness={0.3} distort={0.25} speed={1.65} /></mesh>
+    <mesh scale={1.025}><icosahedronGeometry args={[1.15, 2]} /><meshBasicMaterial color="#c7d2fe" wireframe transparent opacity={0.42} /></mesh>
+  </Float><group ref={orbit} rotation={[0.72, -0.45, 0.1]}>
+    <mesh><torusGeometry args={[1.72, 0.018, 12, 120]} /><meshBasicMaterial color="#94a3ff" transparent opacity={0.85} /></mesh>
+    <mesh rotation={[1.12, 0.65, 0.2]}><torusGeometry args={[2.2, 0.012, 12, 120]} /><meshBasicMaterial color="#2dd4bf" transparent opacity={0.7} /></mesh>
+    <Satellite position={[1.7, 0.02, 0]} color="#f59e0b" /><Satellite position={[-1.42, -1.6, 0]} color="#14b8a6" />
+  </group></group>;
 }
 
 function Network() {

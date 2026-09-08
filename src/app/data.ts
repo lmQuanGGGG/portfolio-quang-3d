@@ -119,7 +119,8 @@ export const profile = {
       title: "AutoFarm",
       desc: "SaaS tự động hóa mạng xã hội đa nền tảng, có log realtime, quota và cơ chế cô lập lỗi.|||AI-powered social automation SaaS with realtime logs, quotas and failure isolation.",
       tech: "Next.js, Node.js, Puppeteer, Supabase",
-      link: "#",
+      link: "https://www.autofarm.space/",
+      logo: "/project-logos/autofarm-logo.png",
       color: "from-cyan-500 to-blue-500"
     },
         {

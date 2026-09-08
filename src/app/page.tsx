@@ -10,10 +10,9 @@ import {
   GraduationCap,
   Mail,
   MapPin,
-  Sparkles,
 } from "lucide-react";
 import { profile } from "./data";
-import Scene3D from "@/components/Scene3D";
+import HeartCanvas from "@/components/HeartCanvas";
 import { useLanguage } from "@/components/LanguageProvider";
 
 const reveal = {
@@ -55,7 +54,6 @@ export default function Home() {
   };
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 800], [0, 130]);
-  const heroOpacity = useTransform(scrollY, [0, 650], [1, 0.18]);
   const visualY = useTransform(scrollY, [0, 800], [0, -115]);
   return (
     <main className={`site-shell overflow-hidden bg-[#fbfcfe] text-slate-900 ${language === "vi" ? "lang-vi" : "lang-en"}`}>
@@ -63,10 +61,11 @@ export default function Home() {
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
       <div className="grid-noise" />
+      <div className="background-heart"><HeartCanvas /></div>
       <div className="scatter scatter-one" /><div className="scatter scatter-two" /><div className="scatter scatter-three" />
 
-      <motion.section style={{ y: heroY, opacity: heroOpacity }} className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-20 pt-12 sm:px-8 sm:pt-20 lg:px-10">
-        <div className="grid w-full items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
+      <motion.section style={{ y: heroY }} className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-20 pt-12 sm:px-8 sm:pt-20 lg:px-10">
+        <div className="grid w-full items-center gap-14 lg:-translate-y-10 lg:grid-cols-[1.1fr_.9fr]">
           <motion.div initial="hidden" animate="visible" transition={{ staggerChildren: 0.1 }}>
             <motion.div variants={reveal} className="status-pill">
               <span className="status-dot" /> {t("Lập trình viên tại FPT IS", "Software Developer at FPT IS")}
@@ -92,12 +91,15 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          <motion.div style={{ y: visualY }} initial={{ opacity: 0, scale: 0.95, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <motion.div style={{ y: visualY }} initial={{ opacity: 0, scale: 0.95, y: 18 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative mx-auto w-full max-w-md lg:max-w-[28rem]">
             <div className="portrait-orbit" />
-            <div className="scene-card"><Scene3D /><div className="scene-caption"><span className="status-dot" /> {t("Xây dựng có chủ đích", "Building with intent")}</div></div>
-            <div className="floating-note right-[-1rem] top-[15%] sm:right-[-2.5rem]">
-              <Sparkles size={17} className="text-indigo-600" />
-              <span>{t("AI + tự động hóa", "AI + automation")}</span>
+            <div className="lanyard" aria-hidden="true"><span className="lanyard-loop" /><span className="lanyard-clip" /></div>
+            <div className="hero-photo-card">
+              <div className="badge-header"><span className="badge-mark">LMQ.</span><span>EMPLOYEE ID · 2026</span></div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/quang-portrait.png" alt="Lê Minh Quang" />
+              <div className="badge-glare" aria-hidden="true" />
+              <div className="hero-photo-caption"><span><small>PRODUCT · CLOUD · CI/CD</small>Lê Minh Quang</span><span><small>ROLE</small>{t("Kỹ sư Full-stack & Cloud", "Full-stack & Cloud Engineer")}</span></div>
             </div>
             <div className="floating-note bottom-[11%] left-[-.75rem] sm:left-[-2rem]">
               <span className="font-mono text-xs text-emerald-600">01</span>
@@ -109,7 +111,9 @@ export default function Home() {
 
       <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.18 }} transition={{ duration: 0.65 }} variants={reveal} id="about" className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
-          <SectionHeading eyebrow={t("Giới thiệu", "About me")} title={t("Hệ thống thực tế, được xây dựng chỉn chu.", "Practical systems, built with care.")} description={t("Tôi biến yêu cầu sản phẩm thành phần mềm dễ bảo trì: từ nền tảng doanh nghiệp, REST API đến AI automation đáng tin cậy.", "I turn product requirements into maintainable software: from enterprise platforms and REST APIs to reliable AI automation workflows.")} />
+          <div>
+            <SectionHeading eyebrow={t("Giới thiệu", "About me")} title={t("Hệ thống thực tế, được xây dựng chỉn chu.", "Practical systems, built with care.")} description={t("Tôi biến yêu cầu sản phẩm thành phần mềm dễ bảo trì: từ nền tảng doanh nghiệp, REST API đến AI automation đáng tin cậy.", "I turn product requirements into maintainable software: from enterprise platforms and REST APIs to reliable AI automation workflows.")} />
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               [t("Ngôn ngữ", "Languages"), "C#, TypeScript, JavaScript, Dart, Python, SQL"],
@@ -146,7 +150,7 @@ export default function Home() {
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {profile.projects.map((project, index) => (
             <motion.a key={project.title} href={project.link} target={project.link.startsWith("http") ? "_blank" : undefined} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.24 }} transition={{ delay: (index % 3) * 0.1 }} variants={cardReveal} className="project-card group" aria-label={`Open ${project.title}`}>
-              <div className="flex items-start justify-between"><span className="project-index">0{index + 1}</span>{project.link !== "#" && <ArrowUpRight size={19} className="text-slate-400 transition group-hover:text-indigo-600" />}</div>
+              <div className="flex items-start justify-between"><span className="project-index">0{index + 1}</span>{project.logo && <img src={project.logo} alt="" className="project-logo" />}{project.link !== "#" && <ArrowUpRight size={19} className="text-slate-400 transition group-hover:text-indigo-600" />}</div>
               <div className="mt-16"><h3 className="text-xl font-semibold tracking-[-0.035em] text-slate-950">{project.title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{localize(project.desc)}</p></div>
               <div className="mt-7 flex flex-wrap gap-2">{project.tech.split(", ").map((tech) => <span key={tech} className="tag">{tech}</span>)}</div>
             </motion.a>
