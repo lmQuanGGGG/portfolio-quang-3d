@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring } from "framer-motion"; // Import thêm us
 import Scene3D from "@/components/Scene3D";
 import { Code2, Smartphone, Rocket, Search, Layout, Database, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // Metadata chuẩn SEO (Next.js App Router hỗ trợ export metadata, nhưng ở client component ta dùng cách khác hoặc bỏ qua trong demo này)
 // Trong thực tế, bạn nên chuyển phần này sang layout.tsx hoặc dùng server component để SEO tốt nhất.
@@ -25,41 +26,44 @@ const services = [
   {
     icon: Layout,
     title: "Web Design & Development",
-    desc: "Thiết kế Website chuẩn UX/UI, Responsive trên mọi thiết bị. Sử dụng công nghệ mới nhất (Next.js, React) để đảm bảo tốc độ và hiệu năng.",
+    desc: "Thiết kế Website chuẩn UX/UI, responsive trên mọi thiết bị với Next.js và React để đảm bảo tốc độ và hiệu năng.|||UX/UI-focused responsive websites built with Next.js and React for speed and performance.",
     tags: ["Landing Page", "E-commerce", "Portfolio", "Dashboard"],
     color: "from-blue-500 to-cyan-500"
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
-    desc: "Xây dựng ứng dụng di động đa nền tảng (iOS & Android) mượt mà với Flutter hoặc React Native. Tối ưu trải nghiệm người dùng.",
+    desc: "Xây dựng ứng dụng di động đa nền tảng mượt mà với Flutter hoặc React Native, tối ưu trải nghiệm người dùng.|||Smooth cross-platform mobile apps with Flutter or React Native, optimized for user experience.",
     tags: ["iOS", "Android", "Cross-platform", "App Store Optimization"],
     color: "from-purple-500 to-pink-500"
   },
   {
     icon: Database,
     title: "System & Backend API",
-    desc: "Thiết kế hệ thống Backend mạnh mẽ, bảo mật và có khả năng mở rộng cao (Scalable). Tích hợp Database và API chuẩn RESTful/GraphQL.",
+    desc: "Thiết kế backend mạnh mẽ, bảo mật, có khả năng mở rộng; tích hợp database và API RESTful/GraphQL.|||Secure, scalable backend systems with database and RESTful/GraphQL API integration.",
     tags: ["Node.js", ".NET", "Database Design", "Cloud AWS/Azure"],
     color: "from-green-500 to-emerald-500"
   },
   {
     icon: Search,
     title: "SEO & Performance",
-    desc: "Tối ưu hóa công cụ tìm kiếm (SEO) giúp website lên top Google. Cải thiện tốc độ tải trang (Core Web Vitals) để giữ chân khách hàng.",
+    desc: "Tối ưu SEO và Core Web Vitals để website dễ tìm thấy hơn, tải nhanh hơn và giữ chân khách hàng.|||SEO and Core Web Vitals optimization for better discoverability, speed and retention.",
     tags: ["Technical SEO", "Speed Optimization", "Analytics", "Audit"],
     color: "from-orange-500 to-red-500"
   }
 ];
 
 const process = [
-  { step: "01", title: "Discovery", desc: "Thảo luận yêu cầu, phân tích đối thủ và xác định mục tiêu dự án." },
-  { step: "02", title: "Design", desc: "Lên ý tưởng, Wireframe và thiết kế UI/UX chi tiết để chốt giao diện." },
-  { step: "03", title: "Development", desc: "Lập trình (Coding) với các tiêu chuẩn Clean Code và bảo mật cao nhất." },
-  { step: "04", title: "Deploy & Support", desc: "Triển khai lên server, kiểm thử và bảo trì/nâng cấp dài hạn." },
+  { step: "01", title: "Discovery", desc: "Thảo luận yêu cầu, phân tích đối thủ và xác định mục tiêu dự án.|||Discuss requirements, study the landscape and define project goals." },
+  { step: "02", title: "Design", desc: "Lên ý tưởng, wireframe và thiết kế UI/UX chi tiết để chốt giao diện.|||Create concepts, wireframes and detailed UI/UX direction." },
+  { step: "03", title: "Development", desc: "Lập trình theo tiêu chuẩn clean code và bảo mật cao.|||Build with clean-code and high security standards." },
+  { step: "04", title: "Deploy & Support", desc: "Triển khai, kiểm thử và bảo trì/nâng cấp dài hạn.|||Deploy, test and provide long-term maintenance and upgrades." },
 ];
 
 export default function ServicesPage() {
+  const { language } = useLanguage();
+  const t = (vi: string, en: string) => language === "vi" ? vi : en;
+  const localize = (value: string) => { const [vi, en] = value.split("|||"); return language === "vi" ? vi : (en || vi); };
   // --- THÊM LOGIC THANH TIẾN TRÌNH ---
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
@@ -96,8 +100,7 @@ export default function ServicesPage() {
             </Reveal>
             <Reveal delay={0.2}>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-                    Tôi cung cấp các giải pháp công nghệ toàn diện giúp doanh nghiệp của bạn bứt phá. 
-                    Từ Website tốc độ cao đến Ứng dụng di động mượt mà, tất cả đều được "may đo" riêng cho bạn.
+                    {t("Tôi cung cấp các giải pháp công nghệ toàn diện giúp doanh nghiệp của bạn bứt phá. Từ website tốc độ cao đến ứng dụng di động mượt mà, tất cả đều được may đo riêng cho bạn.", "I deliver end-to-end technology solutions that help your business move forward — from high-performance websites to polished mobile apps, tailored to your goals.")}
                 </p>
             </Reveal>
             <Reveal delay={0.3}>
@@ -134,7 +137,7 @@ export default function ServicesPage() {
                                 </div>
                                 
                                 <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                                <p className="text-gray-400 mb-6 leading-relaxed">{service.desc}</p>
+                                <p className="text-gray-400 mb-6 leading-relaxed">{localize(service.desc)}</p>
                                 
                                 <div className="flex flex-wrap gap-2">
                                     {service.tags.map((tag, idx) => (
@@ -155,7 +158,7 @@ export default function ServicesPage() {
             <Reveal>
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4">Workflow Process</h2>
-                    <p className="text-gray-400">Quy trình làm việc chuyên nghiệp, minh bạch và hiệu quả.</p>
+                    <p className="text-gray-400">{t("Quy trình làm việc chuyên nghiệp, minh bạch và hiệu quả.", "A professional, transparent and effective delivery process.")}</p>
                 </div>
             </Reveal>
 
@@ -172,7 +175,7 @@ export default function ServicesPage() {
                             </div>
                             
                             <h3 className="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors">{step.title}</h3>
-                            <p className="text-sm text-gray-400 leading-relaxed px-2">{step.desc}</p>
+                            <p className="text-sm text-gray-400 leading-relaxed px-2">{localize(step.desc)}</p>
                         </div>
                     </Reveal>
                 ))}
@@ -186,7 +189,7 @@ export default function ServicesPage() {
                     Ready to start?
                 </h2>
                 <p className="text-gray-400 mb-10 max-w-xl mx-auto">
-                    Hãy để tôi giúp bạn biến ý tưởng thành hiện thực. Liên hệ ngay để nhận tư vấn miễn phí và báo giá chi tiết.
+                    {t("Hãy để tôi giúp bạn biến ý tưởng thành hiện thực. Liên hệ ngay để nhận tư vấn miễn phí và báo giá chi tiết.", "Let’s turn your idea into a reliable product. Get in touch for a free consultation and detailed estimate.")}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link 
@@ -196,7 +199,7 @@ export default function ServicesPage() {
                         Contact Me
                     </Link>
                     <a 
-                        href="mailto:leminhquang2k4@gmail.com"
+                        href="mailto:lmquang.devops@gmail.com"
                         className="px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition"
                     >
                         Email Me

@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 export const metadata: Metadata = {
   title: "Le Minh Quang - Portfolio",
   description: "Software Engineer Portfolio",
+  icons: { icon: "/lmq-logo.svg", shortcut: "/lmq-logo.svg", apple: "/lmq-logo.svg" },
 };
 
 export default function RootLayout({

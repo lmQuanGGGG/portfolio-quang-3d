@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Scene3D from "@/components/Scene3D";
 import { Mail, MapPin, Phone, Send, Github, Linkedin, Copy, Check, FileText } from "lucide-react"; // Đã thêm FileText
 import { useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // Component hiệu ứng xuất hiện
 function Reveal({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) {
@@ -58,13 +59,15 @@ function ContactItem({ text, icon: Icon, label, href, target = "_self" }: { text
 }
 
 export default function ContactPage() {
+  const { language } = useLanguage();
+  const t = (vi: string, en: string) => language === "vi" ? vi : en;
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success">("idle");
   
   // State cho form
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "Hợp tác dự án",
+    subject: "project",
     message: ""
   });
 
@@ -81,11 +84,12 @@ export default function ContactPage() {
         setFormStatus("success");
         
         // Tạo link mailto để mở ứng dụng mail
-        const subject = encodeURIComponent(`[Portfolio Contact] ${formData.subject} - from ${formData.name}`);
+        const subjectLabels: Record<string, string> = { project: t("Hợp tác dự án", "Project collaboration"), hiring: t("Tuyển dụng", "Hiring"), technical: t("Trao đổi kỹ thuật", "Technical discussion"), other: t("Khác", "Other") };
+        const subject = encodeURIComponent(`[Portfolio Contact] ${subjectLabels[formData.subject]} - from ${formData.name}`);
         const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
         
         // Mở trình gửi mail mặc định
-        window.location.href = `mailto:leminhquang2k4@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:lmquang.devops@gmail.com?subject=${subject}&body=${body}`;
         
         // Reset sau 2s
         setTimeout(() => setFormStatus("idle"), 3000);
@@ -115,7 +119,7 @@ export default function ContactPage() {
             </Reveal>
             <Reveal delay={0.2}>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                    Bạn có ý tưởng thú vị? Hay muốn hợp tác trong dự án tiếp theo? Đừng ngần ngại liên hệ với tôi.
+                    {t("Bạn có ý tưởng thú vị? Hay muốn hợp tác trong dự án tiếp theo? Đừng ngần ngại liên hệ với tôi.", "Have an interesting idea or want to collaborate on your next project? Feel free to get in touch.")}
                 </p>
             </Reveal>
         </div>
@@ -135,10 +139,10 @@ export default function ContactPage() {
                     <div className="space-y-4">
                         {/* Email */}
                         <ContactItem 
-                            text="leminhquang2k4@gmail.com" 
+                            text="lmquang.devops@gmail.com" 
                             icon={Mail} 
                             label="Email" 
-                            href="mailto:leminhquang2k4@gmail.com"
+                            href="mailto:lmquang.devops@gmail.com"
                         />
                         
                         {/* Phone */}
@@ -151,10 +155,10 @@ export default function ContactPage() {
 
                         {/* CV / Resume - MỚI THÊM */}
                         <ContactItem 
-                            text="Xem CV (PDF)" 
+                            text={t("Xem CV (PDF)", "View CV (PDF)")} 
                             icon={FileText} 
                             label="Curriculum Vitae" 
-                            href="/CV_LeMinhQuang_Software_Engineer_2026.pdf"
+                            href="/CV-LeMinhQuang_Software_Engineer.pdf"
                             target="_blank"
                         />
                         
@@ -165,7 +169,7 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Base Location</p>
-                                <p className="text-white font-medium">Thủ Đức, TP. Hồ Chí Minh</p>
+                                <p className="text-white font-medium">{t("Thủ Đức, TP. Hồ Chí Minh", "Thu Duc, Ho Chi Minh City")}</p>
                             </div>
                         </div>
                     </div>
@@ -200,7 +204,7 @@ export default function ContactPage() {
                     <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
                     <h2 className="text-2xl font-bold mb-2 relative z-10">Send Message</h2>
-                    <p className="text-gray-400 mb-8 text-sm relative z-10">Điền thông tin bên dưới để mở trình soạn thảo email.</p>
+                    <p className="text-gray-400 mb-8 text-sm relative z-10">{t("Điền thông tin bên dưới để mở trình soạn thảo email.", "Fill in the form below to open your email app.")}</p>
 
                     <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -213,7 +217,7 @@ export default function ContactPage() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500/50 focus:bg-black/40 transition-all"
-                                    placeholder="Tên của bạn"
+                                    placeholder={t("Tên của bạn", "Your name")}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -238,10 +242,10 @@ export default function ContactPage() {
                                 onChange={handleChange}
                                 className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500/50 focus:bg-black/40 transition-all appearance-none cursor-pointer"
                             >
-                                <option className="bg-gray-900">Hợp tác dự án</option>
-                                <option className="bg-gray-900">Tuyển dụng</option>
-                                <option className="bg-gray-900">Trao đổi kỹ thuật</option>
-                                <option className="bg-gray-900">Khác</option>
+                                <option value="project" className="bg-gray-900">{t("Hợp tác dự án", "Project collaboration")}</option>
+                                <option value="hiring" className="bg-gray-900">{t("Tuyển dụng", "Hiring")}</option>
+                                <option value="technical" className="bg-gray-900">{t("Trao đổi kỹ thuật", "Technical discussion")}</option>
+                                <option value="other" className="bg-gray-900">{t("Khác", "Other")}</option>
                             </select>
                         </div>
 
@@ -254,7 +258,7 @@ export default function ContactPage() {
                                 value={formData.message}
                                 onChange={handleChange}
                                 className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500/50 focus:bg-black/40 transition-all resize-none"
-                                placeholder="Nội dung tin nhắn..."
+                                placeholder={t("Nội dung tin nhắn...", "Your message...")}
                             ></textarea>
                         </div>
 

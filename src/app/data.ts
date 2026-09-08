@@ -26,21 +26,28 @@ export const profile = {
       period: "12/2025 - Nay|||12/2025 - Present",
       role: "Lập trình viên phần mềm|||Software Developer",
       project: "Lightbase Mini App Management CMS · VNEPS · eTrip",
-      description: "Phát triển hệ thống quản lý TypeScript dạng mô-đun cho vòng đời 4 Mini App và React Native (Expo) Super App shell; xây luồng phân phối backend, RBAC và ứng dụng AI Agents/MCP. Phát triển frontend responsive, component tái sử dụng cho VNEPS; bảo trì eTrip trong quá trình chuyển từ FIS Insight sang myFPT Next, sửa lỗi check-in và icon giao diện bị thiếu.|||Developed a modular TypeScript management system for the lifecycle of four Mini Apps and a React Native (Expo) Super App shell; built backend distribution workflows and RBAC with AI Agents/MCP. Delivered responsive reusable frontend modules for VNEPS and maintained eTrip during its FIS Insight-to-myFPT Next migration, fixing check-in failures and missing UI icons."
+      description: "Phát triển CMS TypeScript dạng mô-đun cho vòng đời 4 Mini App và React Native (Expo) Super App shell.\nXây luồng phân phối backend, RBAC và ứng dụng AI Agents/MCP.\nPhát triển frontend responsive, component tái sử dụng cho VNEPS.\nBảo trì eTrip trong đợt migration FIS Insight sang myFPT Next; sửa lỗi check-in và icon UI bị thiếu.|||Developed a modular TypeScript CMS for the lifecycle of four Mini Apps and a React Native (Expo) Super App shell.\nBuilt backend distribution workflows, RBAC and AI Agents/MCP-assisted delivery.\nDelivered responsive frontend modules and reusable UI components for VNEPS.\nMaintained eTrip during its FIS Insight-to-myFPT Next migration, fixing check-in failures and missing UI icons."
     },
     {
       company: "TRIEU HY MEDIA COMPANY LIMITED",
       period: "06/2026 - Nay|||06/2026 - Present",
       role: "Lập trình viên Full-stack / Mobile & Cloud tự do|||Freelance Full-stack / Mobile & Cloud Developer",
       project: "Zhaoxi · CocoDrama · Alibaba Cloud",
-      description: "Thiết kế trên Figma và phát triển Zhaoxi - nền tảng đặt hàng/dịch vụ trên web gồm luồng khách hàng và cổng đối tác quản lý, cấu hình cửa hàng. Hỗ trợ triển khai CocoDrama, phát hành mobile và xử lý lỗi release; cấu hình Alibaba Cloud OSS, VOD, CDN, RAM, DNS/domain và SSL; phối hợp trực tiếp với đội kỹ thuật Trung Quốc về yêu cầu ứng dụng, API, hạ tầng cloud và xử lý lỗi.|||Designed in Figma and developed Zhaoxi, a web ordering/service platform with customer flows and a partner portal for store configuration and management. Supported CocoDrama deployment, mobile publishing and release troubleshooting; configured Alibaba Cloud OSS, VOD, CDN, RAM, DNS/domain verification and SSL; collaborated directly with a China-based technical team on requirements, APIs, cloud infrastructure and bug resolution."
+      description: "Thiết kế Figma và phát triển Zhaoxi, nền tảng đặt hàng/dịch vụ với luồng khách hàng và cổng đối tác quản lý cửa hàng.\nHỗ trợ triển khai CocoDrama, phát hành mobile và xử lý lỗi release.\nCấu hình Alibaba Cloud: OSS, VOD, CDN, RAM, DNS/domain verification và SSL.\nPhối hợp trực tiếp với đội kỹ thuật Trung Quốc về yêu cầu ứng dụng, API, cloud infrastructure và xử lý lỗi.|||Designed in Figma and developed Zhaoxi, an ordering/service platform with customer flows and a partner portal for store management.\nSupported CocoDrama deployment, mobile publishing and release troubleshooting.\nConfigured Alibaba Cloud: OSS, VOD, CDN, RAM, DNS/domain verification and SSL.\nCollaborated directly with a China-based technical team on app requirements, APIs, cloud infrastructure and bug resolution."
+    },
+    {
+      company: "StorePublish",
+      period: "2026 - Nay|||2026 - Present",
+      role: "Nhà sáng lập · Kỹ sư Full-stack & Cloud|||Founder · Full-stack & Cloud Engineer",
+      project: "App Publishing · Website · Mobile App · CRM · AI Solutions",
+      description: "Xây dựng và vận hành StorePublish như một mô hình dịch vụ sản phẩm số trọn gói.\nTrực tiếp thiết kế, phát triển và triển khai các dịch vụ: Google Play/App Store publishing, website, mobile app, CRM/ERP và AI integration.\nPhụ trách developer account, tối ưu Store Listing, xử lý reject và bảo trì phát hành.|||Built and operate StorePublish as an end-to-end digital-product service model.\nPersonally design, develop and deliver Google Play/App Store publishing, websites, mobile apps, CRM/ERP and AI integration.\nOwn developer accounts, Store Listing optimization, reject resolution and release maintenance."
     },
     {
       company: "Hynnie - TMTECH Lighting",
       period: "07/2025 - 10/2025",
       role: "Thực tập sinh Full-stack|||Full-stack Developer Intern",
       project: "Hệ thống ERP nội bộ|||Internal ERP System",
-      description: "Hỗ trợ phát triển ERP nội bộ; triển khai CRUD, xác thực/phân quyền, tích hợp REST API, kiểm tra biểu mẫu và sửa lỗi bằng React, ASP.NET Core (.NET 8), C# và SQL Server.|||Supported an internal ERP and implemented CRUD, authentication/authorization, REST integrations, form validation and defect fixes using React, ASP.NET Core (.NET 8), C# and SQL Server."
+      description: "Hỗ trợ phát triển hệ thống ERP nội bộ bằng React, ASP.NET Core (.NET 8), C# và SQL Server.\nTriển khai CRUD, xác thực/phân quyền, REST integration, kiểm tra biểu mẫu và sửa lỗi.|||Supported an internal ERP using React, ASP.NET Core (.NET 8), C# and SQL Server.\nImplemented CRUD, authentication/authorization, REST integrations, form validation and defect fixes."
     },
   ],
   // Dữ liệu từ các chứng chỉ (Link Credly chuẩn)
@@ -120,7 +127,6 @@ export const profile = {
       desc: "SaaS tự động hóa mạng xã hội đa nền tảng, có log realtime, quota và cơ chế cô lập lỗi.|||AI-powered social automation SaaS with realtime logs, quotas and failure isolation.",
       tech: "Next.js, Node.js, Puppeteer, Supabase",
       link: "https://www.autofarm.space/",
-      logo: "/project-logos/autofarm-logo.png",
       color: "from-cyan-500 to-blue-500"
     },
         {
