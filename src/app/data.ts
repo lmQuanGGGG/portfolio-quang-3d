@@ -5,10 +5,10 @@ export const profile = {
   role: "Software Engineer • Full-stack, Mobile & Cloud",
     bio: "Software Engineer with enterprise experience at FPT IS and hands-on delivery across C# (.NET 8), TypeScript, React, Flutter and Alibaba Cloud.",
   stats: [
-        { label: "Professional roles", value: "3" },
-        { label: "Mini Apps managed", value: "4" },
-        { label: "Core products", value: "4" },
-        { label: "Model ROC-AUC", value: "0.87" },
+        { label: "Apps built", value: "10+" },
+        { label: "Websites built", value: "35+" },
+        { label: "Apps published", value: "15+" },
+        { label: "Total projects", value: "65+" },
   ],
   skills: [
         "Dart & Flutter",
@@ -164,13 +164,6 @@ export const profile = {
       link: "https://github.com/lmQuanGGGG/gamenect_ai_training",
       color: "from-purple-500 to-pink-500"
     },
-    {
-      title: "QConcert",
-      desc: "Nền tảng vé trực tuyến với booking transactional, ngăn trùng lặp.|||Online ticketing with transactional booking and duplicate-reservation protection.",
-      tech: "Next.js, ASP.NET Core, SQL Server",
-      link: "https://qconcert.vercel.app/",
-      color: "from-orange-500 to-red-500"
-    }
   ]
 };
 

@@ -4,6 +4,7 @@ import { blogPosts } from "@/app/data";
 import { motion, useScroll, useSpring } from "framer-motion"; 
 import { ArrowLeft, Calendar, Clock, Tag, User, Share2, Copy, Check } from "lucide-react"; 
 import Scene3D from "@/components/Scene3D";
+import SectionScrub from "@/components/motion/SectionScrub";
 import ReactMarkdown from "react-markdown"; 
 import { useState, useEffect } from "react"; 
 import remarkGfm from 'remark-gfm'; 
@@ -102,9 +103,9 @@ export default function BlogPostDetail() {
 
         <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
             
-            <div className="mb-12 text-center md:text-left border-b border-white/10 pb-10">
+            <div className="mb-12 text-center md:text-left border-b border-white/10 pb-10" data-scrub-group>
                 <Reveal delay={0.1}>
-                    <div className="flex flex-wrap justify-center md:justify-start gap-3 text-xs md:text-sm font-mono uppercase tracking-wider mb-6">
+                    <div data-scrub-item className="flex flex-wrap justify-center md:justify-start gap-3 text-xs md:text-sm font-mono uppercase tracking-wider mb-6">
                         <span className="flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20">
                             <Tag size={12}/> {post.category}
                         </span>
@@ -118,13 +119,13 @@ export default function BlogPostDetail() {
                 </Reveal>
             
                 <Reveal delay={0.2}>
-                    <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                    <h1 data-scrub-item className="text-4xl md:text-6xl font-bold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
                         {post.title}
                     </h1>
                 </Reveal>
             
                 <Reveal delay={0.3}>
-                    <div className="flex items-center justify-center md:justify-start gap-4">
+                    <div data-scrub-item className="flex items-center justify-center md:justify-start gap-4">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 p-[2px]">
                             <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
                                 <User size={20} className="text-white"/>
@@ -142,7 +143,7 @@ export default function BlogPostDetail() {
             </div>
 
             <Reveal delay={0.4}>
-                <div className="prose prose-invert prose-lg max-w-none 
+                <div data-scrub-group="individual" className="prose prose-invert prose-lg max-w-none
                     prose-headings:font-bold prose-headings:text-white prose-headings:tracking-tight
                     prose-h1:text-3xl prose-h1:mt-16 prose-h1:mb-8 
                     prose-h2:text-2xl prose-h2:text-purple-300 prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b prose-h2:border-purple-500/20 prose-h2:pb-4
@@ -167,14 +168,16 @@ export default function BlogPostDetail() {
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]} 
                     components={{
+                        h2: ({node, ...props}: any) => <h2 data-scrub-item {...props} />,
+                        h3: ({node, ...props}: any) => <h3 data-scrub-item {...props} />,
                         // FIX QUAN TRỌNG: Thay thế thẻ <p> mặc định bằng <div> để tránh lỗi <p> lồng <div>
                         // Đồng thời áp dụng lại style của đoạn văn vào đây
                         p: ({node, children}: any) => (
-                            <div className="mb-8 leading-loose text-base md:text-lg text-gray-300">{children}</div>
+                            <div data-scrub-item className="mb-8 leading-loose text-base md:text-lg text-gray-300">{children}</div>
                         ),
                         
                         table: ({node, ...props}) => (
-                            <div className="overflow-x-auto my-10 rounded-lg border border-white/10 shadow-lg">
+                            <div data-scrub-item className="overflow-x-auto my-10 rounded-lg border border-white/10 shadow-lg">
                                 <table className="w-full text-left border-collapse" {...props} />
                             </div>
                         ),
@@ -188,7 +191,7 @@ export default function BlogPostDetail() {
                             <td className="p-4 border-b border-white/5 text-gray-300 text-sm leading-relaxed" {...props} />
                         ),
                         img: ({node, ...props}) => (
-                            <div className="my-14 relative group">
+                            <div data-scrub-item className="my-14 relative group">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
                                 <div className="relative rounded-xl overflow-hidden bg-black border border-white/10">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -202,7 +205,7 @@ export default function BlogPostDetail() {
                             const codeString = String(children).replace(/\n$/, '');
                             
                             return !inline && match ? (
-                                <div className="rounded-xl overflow-hidden my-12 border border-white/10 shadow-2xl bg-[#1e1e1e] group">
+                                <div data-scrub-item className="rounded-xl overflow-hidden my-12 border border-white/10 shadow-2xl bg-[#1e1e1e] group">
                                     <div className="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-black/50">
                                         <div className="flex gap-2">
                                             <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
@@ -235,10 +238,10 @@ export default function BlogPostDetail() {
                 </div>
             </Reveal>
 
-            <div className="mt-20 pt-10 border-t border-white/10 text-center">
+            <div className="mt-20 pt-10 border-t border-white/10 text-center" data-scrub-group>
                 <Reveal delay={0.5}>
-                    <p className="text-gray-500 italic mb-4">Thanks for reading!</p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition cursor-pointer">
+                    <p data-scrub-item className="text-gray-500 italic mb-4">Thanks for reading!</p>
+                    <div data-scrub-item className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition cursor-pointer">
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                         <span className="text-xs text-gray-400 font-mono">SYSTEM END OF FILE</span>
                     </div>
@@ -247,6 +250,7 @@ export default function BlogPostDetail() {
         </div>
 
       </article>
+      <SectionScrub refreshKey={post.id} />
     </main>
   );
 }

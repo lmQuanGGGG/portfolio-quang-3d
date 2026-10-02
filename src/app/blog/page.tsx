@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-
 import { blogPosts } from "../data"; 
 import { ArrowDown, Search, BookOpen, Sparkles, FileWarning } from "lucide-react";
 import Scene3D from "@/components/Scene3D"; 
+import SectionScrub from "@/components/motion/SectionScrub";
 
 // --- COMPONENT HIỆU ỨNG ---
 function Reveal({ children, delay = 0, width = "100%" }: { children: React.ReactNode, delay?: number, width?: "100%" | "auto" }) {
@@ -53,30 +54,30 @@ export default function BlogPage() {
       <div className="relative z-10 pt-32">
         
         {/* --- HEADER --- */}
-        <section className="px-4 mb-20 text-center">
+        <section className="px-4 mb-20 text-center" data-scrub-group>
           <ParallaxText yProgress={scrollYProgress} speed={-1.5}>
             <Reveal delay={0.1}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
+              <div data-scrub-item className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
                 <Sparkles size={14} className="text-yellow-400"/>
                 <span className="text-sm font-medium text-gray-300">Insights & Tutorials</span>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h1 className="text-5xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient-x">
+              <h1 data-scrub-item className="text-5xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient-x">
                 Knowledge Base
               </h1>
             </Reveal>
             
             <Reveal delay={0.3}>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p data-scrub-item className="text-xl text-gray-400 max-w-2xl mx-auto">
                 Kho tàng kiến thức về <span className="text-white">Java, JavaScript</span> và các kỹ thuật lập trình hiện đại.
               </p>
             </Reveal>
             
             {/* --- THANH TÌM KIẾM (ĐÃ HOẠT ĐỘNG) --- */}
             <Reveal delay={0.4}>
-              <div className="mt-10 relative max-w-lg mx-auto group">
+              <div data-scrub-item className="mt-10 relative max-w-lg mx-auto group">
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
                 <div className="relative flex items-center bg-black/60 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl">
                   <Search className="ml-4 text-gray-400 group-focus-within:text-pink-500 transition-colors" size={20}/>
@@ -121,12 +122,12 @@ export default function BlogPage() {
             </motion.div>
           ) : (
             // Hiển thị lưới bài viết đã lọc
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-scrub-group="individual">
               {filteredPosts.map((post, i) => (
                 <Reveal key={post.id} delay={i * 0.1}>
                   {/* 2. Bọc article bằng Link trỏ tới /blog/{id} */}
                   <Link href={`/blog/${post.id}`} className="block h-full">
-                    <article className="group cursor-pointer h-full flex flex-col relative">
+                    <article data-scrub-item className="group cursor-pointer h-full flex flex-col relative">
                       <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
                       
                       <div className="relative p-8 bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden hover:border-pink-500/50 hover:shadow-[0_10px_40px_-10px_rgba(236,72,153,0.2)] transition-all duration-500 h-full flex flex-col hover:-translate-y-2">
@@ -165,10 +166,10 @@ export default function BlogPage() {
           )}
         </section>
 
-        <footer className="py-12 text-center border-t border-white/5 bg-black/80 backdrop-blur-xl">
+        <footer className="py-12 text-center border-t border-white/5 bg-black/80 backdrop-blur-xl" data-scrub-group>
           <Reveal>
-            <p className="text-gray-500 text-sm mb-2">Designed & Built by Le Minh Quang</p>
-            <div className="flex justify-center gap-4 text-xs text-gray-600 font-mono">
+            <p data-scrub-item className="text-gray-500 text-sm mb-2">Designed & Built by Le Minh Quang</p>
+            <div data-scrub-item className="flex justify-center gap-4 text-xs text-gray-600 font-mono">
               <span>NEXT.JS 14</span>
               <span>•</span>
               <span>THREE.JS</span>
@@ -179,6 +180,7 @@ export default function BlogPage() {
         </footer>
 
       </div>
+      <SectionScrub refreshKey={searchQuery} />
     </main>
   );
 }

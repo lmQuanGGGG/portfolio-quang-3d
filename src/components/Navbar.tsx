@@ -9,59 +9,161 @@ import { useLanguage } from "./LanguageProvider";
 const links = [
   ["Giới thiệu", "About", "/#about"],
   ["Kinh nghiệm", "Experience", "/#experience"],
-  ["Dự án", "Work", "/#certificates"],
-  ["Dịch vụ", "Services", "/services"],
-  ["Liên hệ", "Contact", "/#services-contact"],
+  ["Dự án", "Work", "/#projects"],
+  ["Chứng chỉ", "Credentials", "/#certificates"],
+  ["Blog", "Blog", "/blog"],
+  ["Liên hệ", "Contact", "/#contact"],
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const { language, toggleLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [navVisible, setNavVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
-  const label = (vi: string, en: string) => language === "vi" ? vi : en;
+  const [onDarkSection, setOnDarkSection] = useState(false);
+  const label = (vi: string, en: string) => (language === "vi" ? vi : en);
   const hasPortfolioNavigation = pathname === "/" || pathname === "/services";
-  const handleSectionLink = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href !== "/#about" || pathname !== "/") return;
+
+  const handleSectionLink = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (!href.startsWith("/#") || pathname !== "/") return;
+    const targetId = href.replace("/#", "");
+    const target = document.getElementById(targetId);
+    if (!target) return;
     event.preventDefault();
     setMenuOpen(false);
-    const about = document.getElementById("about");
-    if (!about) return;
-    window.history.replaceState(null, "", "#about");
-    window.scrollTo({ top: about.getBoundingClientRect().top + window.scrollY + 50, behavior: "smooth" });
+    window.history.replaceState(null, "", `#${targetId}`);
+    if (window.portfolioLenis) window.portfolioLenis.scrollTo(target, { offset: -76 });
+    else target.scrollIntoView();
   };
 
   useEffect(() => {
-    let previousScrollY = window.scrollY;
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY < 72) setNavVisible(true);
-      else if (currentScrollY < previousScrollY - 4) setNavVisible(true);
-      else if (currentScrollY > previousScrollY + 4) setNavVisible(false);
-      setScrolled(currentScrollY >= 72);
-      previousScrollY = currentScrollY;
+    let frame = 0;
+    let wasScrolled = false;
+    let wasDark = false;
+    const updateTheme = () => {
+      frame = 0;
+      const isScrolled = window.scrollY >= 40;
+      const isDark = pathname === "/" && [".work .project-stage", ".statement", ".proof", ".contact"].some((selector) => {
+        const section = document.querySelector<HTMLElement>(selector);
+        if (!section) return false;
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= 42 && bounds.bottom > 42;
+      });
+      if (isScrolled !== wasScrolled) { wasScrolled = isScrolled; setScrolled(isScrolled); }
+      if (isDark !== wasDark) { wasDark = isDark; setOnDarkSection(isDark); }
     };
+    const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(updateTheme); };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    updateTheme();
+    return () => { window.removeEventListener("scroll", onScroll); if (frame) window.cancelAnimationFrame(frame); };
+  }, [pathname]);
 
-  return <header className={`fixed inset-x-0 top-0 z-50 w-full max-w-[100vw] overflow-x-clip px-5 py-3 transition-[transform,background-color,box-shadow] duration-300 ease-out sm:px-8 sm:py-2 ${navVisible ? "translate-y-0" : "-translate-y-full"} ${scrolled ? "bg-white/92 shadow-[0_8px_28px_rgba(15,23,42,.08)] backdrop-blur-xl" : "bg-transparent"}`}>
-    <nav className="mx-auto flex w-full max-w-7xl items-center justify-between">
-      <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-[-0.02em] text-slate-950" aria-label="Lê Minh Quang home">
-        <img src="/lmq-logo.svg" alt="LMQ logo" className="size-8 rounded-[.72rem] shadow-[0_7px_18px_rgba(15,23,42,.16)]" />
-        <span>LMQ<span className="text-indigo-600">.</span></span>
-      </Link>
-      {hasPortfolioNavigation && <div className="hidden items-center gap-8 xl:flex">{links.map(([vi, en, href]) => <Link key={href} href={href} onClick={(event) => handleSectionLink(event, href)} className="text-sm text-slate-500 transition hover:text-slate-950">{label(vi, en)}</Link>)}</div>}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1 text-[11px] font-bold" aria-label="Language selector">
-          <button onClick={() => language !== "vi" && toggleLanguage()} className={`rounded-full px-2.5 py-1.5 transition ${language === "vi" ? "bg-slate-950 text-white shadow-[0_5px_12px_rgba(15,23,42,.16)]" : "text-slate-400 hover:text-slate-950"}`}>VI</button>
-          <button onClick={() => language !== "en" && toggleLanguage()} className={`rounded-full px-2.5 py-1.5 transition ${language === "en" ? "bg-slate-950 text-white shadow-[0_5px_12px_rgba(15,23,42,.16)]" : "text-slate-400 hover:text-slate-950"}`}>EN</button>
+  return (
+    <header
+      data-nav-theme={onDarkSection ? "dark" : "light"}
+      className={`site-nav fixed inset-x-0 top-0 z-50 w-full px-5 py-4 transition-colors duration-300 ease-out sm:px-8 ${
+        scrolled
+          ? onDarkSection
+            ? "border-b border-white/10 bg-[#171b24]/85 backdrop-blur-md"
+            : "border-b border-black/10 bg-[#f7f4ed]/72 backdrop-blur-md"
+          : "bg-transparent"
+      }`}
+    >
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between">
+        <Link
+          href="/"
+          className={`group inline-flex items-center gap-2.5 text-sm font-semibold tracking-tight ${onDarkSection ? "text-white" : "text-[#171816]"}`}
+          aria-label="Lê Minh Quang home"
+        >
+          <div className={`flex size-8 items-center justify-center rounded-full border transition group-hover:bg-[#171816] group-hover:text-white ${onDarkSection ? "border-white/35" : "border-black/20"}`}>
+            <span className="font-mono text-xs font-bold">Q</span>
+          </div>
+          <span className={`tracking-tight ${onDarkSection ? "text-white" : "text-[#171816]"}`}>
+            QUANG<span className="text-[#3348c5]">.</span>
+          </span>
+        </Link>
+
+        {hasPortfolioNavigation && (
+          <div className="hidden items-center gap-4 xl:gap-6 lg:flex">
+            {links.map(([vi, en, href]) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={(event) => handleSectionLink(event, href)}
+                className={`text-[10px] font-semibold tracking-wider uppercase transition hover:text-[#171816] ${onDarkSection ? "text-white/70 hover:!text-white" : "text-[#666761]"}`}
+              >
+                {label(vi, en)}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        <div className="flex items-center gap-3">
+          <div
+            className={`flex items-center rounded-full border p-0.5 text-[10px] font-bold ${onDarkSection ? "border-white/25" : "border-black/15"}`}
+            aria-label="Language selector"
+          >
+            <button
+              onClick={() => language !== "vi" && toggleLanguage()}
+              className={`rounded-full px-2.5 py-1 transition ${
+                language === "vi"
+                  ? "rounded-full bg-[#171816] text-white"
+                  : onDarkSection ? "text-white/60 hover:text-white" : "text-[#777872] hover:text-[#171816]"
+              }`}
+            >
+              VI
+            </button>
+            <button
+              onClick={() => language !== "en" && toggleLanguage()}
+              className={`rounded-full px-2.5 py-1 transition ${
+                language === "en"
+                  ? "rounded-full bg-[#171816] text-white"
+                  : onDarkSection ? "text-white/60 hover:text-white" : "text-[#777872] hover:text-[#171816]"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
+          <a
+            href="mailto:lmquang.devops@gmail.com"
+            className={`hidden rounded-full px-4 py-2 text-[10px] font-semibold transition sm:block ${onDarkSection ? "bg-white text-[#171816] hover:bg-[#cbd5ff]" : "bg-[#171816] text-white hover:bg-[#3348c5]"}`}
+          >
+            {label("Liên hệ", "Contact")}
+          </a>
+
+          {hasPortfolioNavigation && (
+            <button
+              onClick={() => setMenuOpen((open) => !open)}
+              className={`grid size-9 place-items-center transition hover:text-[#3348c5] lg:hidden ${onDarkSection ? "text-white" : "text-[#171816]"}`}
+              aria-label="Toggle navigation"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          )}
         </div>
-        <a href="mailto:lmquang.devops@gmail.com" className="hidden rounded-full bg-slate-950 px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-indigo-600 sm:block">{label("Liên hệ", "Contact")}</a>
-        {hasPortfolioNavigation && <button onClick={() => setMenuOpen((open) => !open)} className="grid size-9 place-items-center text-slate-800 transition hover:text-indigo-600 xl:hidden" aria-label="Toggle navigation">{menuOpen ? <X size={20} /> : <Menu size={21} />}</button>}
-      </div>
-    </nav>
-    {hasPortfolioNavigation && menuOpen && <div className="mx-auto mt-3 w-full max-w-7xl rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-[0_18px_40px_rgba(15,23,42,.14)] backdrop-blur-xl xl:hidden">{links.map(([vi, en, href]) => <Link key={href} onClick={(event) => { handleSectionLink(event, href); if (!event.defaultPrevented) setMenuOpen(false); }} href={href} className="block rounded-xl px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-indigo-50 hover:text-indigo-600">{label(vi, en)}</Link>)}</div>}
-  </header>;
+      </nav>
+
+      {hasPortfolioNavigation && menuOpen && (
+        <div className="mx-auto mt-3 w-full max-w-7xl rounded-2xl border border-black/10 bg-[#f1f0eb]/95 p-4 shadow-xl backdrop-blur-2xl lg:hidden">
+          {links.map(([vi, en, href]) => (
+            <Link
+              key={href}
+              onClick={(event) => {
+                handleSectionLink(event, href);
+                if (!event.defaultPrevented) setMenuOpen(false);
+              }}
+              href={href}
+              className="block rounded-lg px-3 py-2.5 text-sm font-medium text-[#555650] transition hover:bg-black/5 hover:text-[#171816]"
+            >
+              {label(vi, en)}
+            </Link>
+          ))}
+        </div>
+      )}
+    </header>
+  );
 }

@@ -1,45 +1,90 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Line, MeshDistortMaterial, OrbitControls, Sparkles } from "@react-three/drei";
-import { useMemo, useRef } from "react";
+import { ContactShadows, Float, RoundedBox } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-function Satellite({ position, color }: { position: [number, number, number]; color: string }) {
-  return <mesh position={position}><sphereGeometry args={[0.09, 20, 20]} /><meshBasicMaterial color={color} /></mesh>;
-}
+function EditorialSculpture({ lowPower }: { lowPower: boolean }) {
+  const group = useRef<THREE.Group>(null!);
+  const pointer = useRef({ x: 0, y: 0 });
 
-function SystemCore() {
-  const core = useRef<THREE.Mesh>(null!);
-  const orbit = useRef<THREE.Group>(null!);
-  const system = useRef<THREE.Group>(null!);
+  useEffect(() => {
+    const move = (event: PointerEvent) => {
+      pointer.current.x = (event.clientX / window.innerWidth - 0.5) * 0.35;
+      pointer.current.y = (0.5 - event.clientY / window.innerHeight) * 0.25;
+    };
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
+
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
     const scroll = Math.min(window.scrollY / maxScroll, 1);
-    core.current.rotation.y = t * (0.22 + scroll * 1.4);
-    core.current.rotation.z = Math.sin(t * 0.35) * 0.14;
-    orbit.current.rotation.y = t * (0.12 + scroll * 0.7);
-    orbit.current.rotation.x = Math.sin(t * 0.18) * 0.1;
-    system.current.position.y = -scroll * 1.4;
-    system.current.position.x = Math.sin(scroll * Math.PI) * 0.65;
-    system.current.scale.setScalar(1 - scroll * 0.2);
+    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, pointer.current.y * 0.35 + scroll * 0.2, 0.035);
+    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, pointer.current.x * 0.5 - scroll * 0.45 + Math.sin(t * 0.18) * 0.025, 0.035);
+    group.current.position.y = Math.sin(t * 0.45) * 0.035 - scroll * 0.35;
+    group.current.position.z = scroll * 0.45;
   });
-  return <group ref={system}><Float speed={1.7} rotationIntensity={0.25} floatIntensity={0.65}>
-    <mesh ref={core}><icosahedronGeometry args={[1.15, 5]} /><MeshDistortMaterial color="#5666ef" roughness={0.15} metalness={0.3} distort={0.25} speed={1.65} /></mesh>
-    <mesh scale={1.025}><icosahedronGeometry args={[1.15, 2]} /><meshBasicMaterial color="#c7d2fe" wireframe transparent opacity={0.42} /></mesh>
-  </Float><group ref={orbit} rotation={[0.72, -0.45, 0.1]}>
-    <mesh><torusGeometry args={[1.72, 0.018, 12, 120]} /><meshBasicMaterial color="#94a3ff" transparent opacity={0.85} /></mesh>
-    <mesh rotation={[1.12, 0.65, 0.2]}><torusGeometry args={[2.2, 0.012, 12, 120]} /><meshBasicMaterial color="#2dd4bf" transparent opacity={0.7} /></mesh>
-    <Satellite position={[1.7, 0.02, 0]} color="#f59e0b" /><Satellite position={[-1.42, -1.6, 0]} color="#14b8a6" />
-  </group></group>;
-}
 
-function Network() {
-  const points = useMemo(() => [new THREE.Vector3(-2.7, 1.5, -0.5), new THREE.Vector3(-1.85, 2.3, -0.7), new THREE.Vector3(2.55, 1.45, -0.65), new THREE.Vector3(2.95, -1.45, -0.6), new THREE.Vector3(-2.65, -1.85, -0.55)], []);
-  return <>{points.map((point, index) => <Satellite key={index} position={[point.x, point.y, point.z]} color={index % 2 ? "#2dd4bf" : "#818cf8"} />)}<Line points={[points[0], points[1]]} color="#a5b4fc" transparent opacity={0.45} lineWidth={0.6} /><Line points={[points[2], points[3]]} color="#99f6e4" transparent opacity={0.42} lineWidth={0.6} /></>;
+  return (
+    <group ref={group} scale={lowPower ? 0.78 : 0.92}>
+      <Float speed={lowPower ? 0.45 : 0.7} rotationIntensity={0.03} floatIntensity={0.15}>
+        <RoundedBox args={[1.85, 1.85, 0.42]} radius={0.22} smoothness={6} rotation={[0.06, -0.16, -0.13]} position={[-0.2, 0.08, 0]}>
+          <meshPhysicalMaterial color="#d9e2f2" roughness={0.3} metalness={0.02} transmission={0.25} thickness={0.35} clearcoat={0.35} />
+        </RoundedBox>
+        <RoundedBox args={[1.38, 1.38, 0.28]} radius={0.16} smoothness={6} rotation={[-0.04, 0.12, 0.2]} position={[0.34, -0.38, 0.28]}>
+          <meshPhysicalMaterial color="#b5c8df" roughness={0.24} metalness={0.03} transmission={0.4} thickness={0.25} clearcoat={0.4} />
+        </RoundedBox>
+        <mesh position={[0.02, 0.08, 0.34]} rotation={[0.05, 0.16, -0.12]}>
+          <planeGeometry args={[0.78, 0.78]} />
+          <meshPhysicalMaterial color="#5e78bf" roughness={0.24} metalness={0.08} transmission={0.2} clearcoat={0.55} side={THREE.DoubleSide} />
+        </mesh>
+        <mesh position={[0.48, 0.46, 0.1]} rotation={[0.2, -0.2, 0.1]}>
+          <torusGeometry args={[0.18, 0.035, 16, 48]} />
+          <meshStandardMaterial color="#f1b98d" roughness={0.48} metalness={0.05} />
+        </mesh>
+      </Float>
+    </group>
+  );
 }
 
 export default function Scene3D() {
-  return <div className="hero-3d" aria-label="Interactive 3D visualization"><Canvas camera={{ position: [0, 0, 6.8], fov: 43 }} dpr={[1, 1.5]}><ambientLight intensity={1.3} /><directionalLight position={[4, 5, 4]} intensity={2.8} color="#eef2ff" /><pointLight position={[-3, -2, 2]} intensity={8} color="#5eead4" /><SystemCore /><Network /><Sparkles count={110} scale={5.8} size={2.5} speed={0.8} color="#818cf8" /><OrbitControls enablePan={false} enableZoom={false} autoRotate autoRotateSpeed={0.45} minPolarAngle={Math.PI / 2.6} maxPolarAngle={Math.PI / 1.6} /></Canvas><div className="hero-3d-glow" /></div>;
+  const [enabled, setEnabled] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [lowPower, setLowPower] = useState(false);
+  const sceneRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
+    const compact = window.matchMedia("(max-width: 700px)");
+    const update = () => setEnabled(motion.matches);
+    const updatePower = () => setLowPower(compact.matches);
+    update(); updatePower();
+    motion.addEventListener("change", update);
+    compact.addEventListener("change", updatePower);
+    return () => { motion.removeEventListener("change", update); compact.removeEventListener("change", updatePower); };
+  }, []);
+
+  useEffect(() => {
+    const element = sceneRef.current;
+    if (!enabled || !element) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { rootMargin: "100px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [enabled]);
+
+  if (!enabled) return null;
+  return (
+    <div ref={sceneRef} className="absolute inset-0 z-0 h-full w-full overflow-hidden" aria-hidden="true">
+      <Canvas frameloop={inView ? "always" : "never"} camera={{ position: [0, 0, lowPower ? 6.7 : 5.8], fov: lowPower ? 48 : 42 }} dpr={lowPower ? [1, 1] : [1, 1.25]} gl={{ alpha: true, antialias: true }}>
+        <ambientLight intensity={1.4} color="#fffaf2" />
+        <directionalLight position={[4, 6, 5]} intensity={2.8} color="#fff4df" />
+        <directionalLight position={[-4, 1, 2]} intensity={1.1} color="#b8c8ef" />
+        <EditorialSculpture lowPower={lowPower} />
+        <ContactShadows position={[0, -1.65, 0]} opacity={lowPower ? 0.18 : 0.25} scale={3.8} blur={2.8} far={3} resolution={lowPower ? 64 : 128} color="#3c4659" />
+      </Canvas>
+    </div>
+  );
 }
