@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, type MouseEvent } from "react";
@@ -10,8 +11,8 @@ const links = [
   ["Giới thiệu", "About", "/#about"],
   ["Kinh nghiệm", "Experience", "/#experience"],
   ["Dự án", "Work", "/#projects"],
+  ["Dịch vụ", "Services", "https://storepublish.space/"],
   ["Chứng chỉ", "Credentials", "/#certificates"],
-  ["Blog", "Blog", "/blog"],
   ["Liên hệ", "Contact", "/#contact"],
 ];
 
@@ -46,12 +47,17 @@ export default function Navbar() {
     const updateTheme = () => {
       frame = 0;
       const isScrolled = window.scrollY >= 40;
-      const isDark = pathname === "/" && [".work .project-stage", ".statement", ".proof", ".contact"].some((selector) => {
+      const darkSection = [".work .project-stage", ".statement", ".proof"].some((selector) => {
         const section = document.querySelector<HTMLElement>(selector);
         if (!section) return false;
         const bounds = section.getBoundingClientRect();
         return bounds.top <= 42 && bounds.bottom > 42;
       });
+      const contact = document.querySelector<HTMLElement>(".contact");
+      const contactBounds = contact?.getBoundingClientRect();
+      const contactReady = contactBounds && contactBounds.top <= 42 && contactBounds.bottom > 42 &&
+        (contact?.dataset.darkReady === "true" || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      const isDark = pathname === "/" && (darkSection || Boolean(contactReady));
       if (isScrolled !== wasScrolled) { wasScrolled = isScrolled; setScrolled(isScrolled); }
       if (isDark !== wasDark) { wasDark = isDark; setOnDarkSection(isDark); }
     };
@@ -78,9 +84,7 @@ export default function Navbar() {
           className={`group inline-flex items-center gap-2.5 text-sm font-semibold tracking-tight ${onDarkSection ? "text-white" : "text-[#171816]"}`}
           aria-label="Lê Minh Quang home"
         >
-          <div className={`flex size-8 items-center justify-center rounded-full border transition group-hover:bg-[#171816] group-hover:text-white ${onDarkSection ? "border-white/35" : "border-black/20"}`}>
-            <span className="font-mono text-xs font-bold">Q</span>
-          </div>
+          <Image src="/lmq-logo.svg" alt="" width={32} height={32} className="size-8 rounded-[9px] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105" priority />
           <span className={`tracking-tight ${onDarkSection ? "text-white" : "text-[#171816]"}`}>
             QUANG<span className="text-[#3348c5]">.</span>
           </span>
@@ -92,6 +96,8 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
+                target={href.startsWith("https://") ? "_blank" : undefined}
+                rel={href.startsWith("https://") ? "noopener noreferrer" : undefined}
                 onClick={(event) => handleSectionLink(event, href)}
                 className={`text-[10px] font-semibold tracking-wider uppercase transition hover:text-[#171816] ${onDarkSection ? "text-white/70 hover:!text-white" : "text-[#666761]"}`}
               >
@@ -157,6 +163,8 @@ export default function Navbar() {
                 if (!event.defaultPrevented) setMenuOpen(false);
               }}
               href={href}
+              target={href.startsWith("https://") ? "_blank" : undefined}
+              rel={href.startsWith("https://") ? "noopener noreferrer" : undefined}
               className="block rounded-lg px-3 py-2.5 text-sm font-medium text-[#555650] transition hover:bg-black/5 hover:text-[#171816]"
             >
               {label(vi, en)}

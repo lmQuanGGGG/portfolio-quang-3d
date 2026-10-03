@@ -3,12 +3,12 @@
 export const profile = {
   name: "LÊ MINH QUANG",
   role: "Software Engineer • Full-stack, Mobile & Cloud",
-    bio: "Software Engineer with enterprise experience at FPT IS and hands-on delivery across C# (.NET 8), TypeScript, React, Flutter and Alibaba Cloud.",
+    bio: "At FPT IS, I engineer systems for enterprise scale. As a freelancer, I bring web, mobile and AI products from the first sketch through launch.",
   stats: [
         { label: "Apps built", value: "10+" },
         { label: "Websites built", value: "35+" },
-        { label: "Apps published", value: "15+" },
-        { label: "Total projects", value: "65+" },
+        { label: "Apps published", value: "25+" },
+        { label: "Total projects", value: "75+" },
   ],
   skills: [
         "Dart & Flutter",

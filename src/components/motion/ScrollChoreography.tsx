@@ -22,18 +22,12 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
 
         const hero = document.querySelector<HTMLElement>("[data-scroll-hero]");
         if (hero) {
-          const videoFrame = hero.querySelector<HTMLElement>("[data-hero-video-frame]");
-          if (videoFrame) {
-            gsap.set(videoFrame, { scale: mobile ? 1 : 1.015, rotation: 0 });
-          }
           const heroTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: hero,
               start: "top top",
-              end: mobile ? "+=120%" : "+=150%",
-              pin: true,
-              scrub: 0.8,
-              anticipatePin: 1,
+              end: "bottom top",
+              scrub: 0.35,
               invalidateOnRefresh: true,
             },
           });
@@ -42,10 +36,8 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
             .to(".hero-title-line--one", { xPercent: mobile ? -3 : -7, yPercent: mobile ? -6 : -12, ease: "none" }, 0)
             .to(".hero-title-line--two", { xPercent: mobile ? 3 : 8, yPercent: mobile ? 5 : 9, ease: "none" }, 0)
             .to(".hero-content", { y: mobile ? -12 : -38, opacity: mobile ? 0.86 : 0.72, ease: "none" }, 0.16)
-            .to(".hero-visual", { xPercent: mobile ? 0 : -3, yPercent: mobile ? -2 : -5, scale: mobile ? 1.025 : 1.07, rotation: mobile ? 0 : 1, ease: "none" }, 0.2)
             .to(".hero-grid", { yPercent: 4, opacity: 0.18, ease: "none" }, 0.2)
             .to(".hero-bottom", { xPercent: mobile ? 0 : 5, y: mobile ? -9 : -20, opacity: 0.8, ease: "none" }, 0.3)
-            .to(".hero-meta", { y: -14, opacity: 0.72, ease: "none" }, 0)
             .to(".hero-kicker", { x: mobile ? 4 : 16, opacity: 0.78, ease: "none" }, 0.12)
             .to(".hero-index", { y: -10, opacity: 0.62, ease: "none" }, 0.25);
         }
@@ -137,6 +129,36 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
           });
           aboutTimeline.to(".intro-label", { y: -24, opacity: 0.76, duration: 0.55 }, 0.18);
           if (heading) aboutTimeline.to(heading, { y: -7, scale: 1.012, transformOrigin: "50% 50%", duration: 0.07 }, 0.93);
+        }
+
+        const workIntro = document.querySelector<HTMLElement>("[data-work-intro]");
+        if (workIntro) {
+          const eyebrow = workIntro.querySelector<HTMLElement>(".eyebrow");
+          const firstWords = gsap.utils.toArray<HTMLElement>(".work-intro-line--first .work-intro-word", workIntro);
+          const secondWords = gsap.utils.toArray<HTMLElement>(".work-intro-line--second .work-intro-word", workIntro);
+          const descriptionWords = gsap.utils.toArray<HTMLElement>(".work-intro-description-word", workIntro);
+
+          gsap.set(eyebrow, { x: mobile ? -20 : -42, opacity: 0 });
+          gsap.set(firstWords, { x: mobile ? -18 : -44, y: mobile ? 30 : 68, rotationX: -68, skewX: -7, opacity: 0, filter: "blur(9px)", transformPerspective: 900 });
+          gsap.set(secondWords, { x: mobile ? 24 : 58, y: mobile ? 28 : 62, rotationX: 62, skewX: 6, opacity: 0, filter: "blur(9px)", transformPerspective: 900 });
+          gsap.set(descriptionWords, { x: -14, y: 18, opacity: 0, filter: "blur(4px)" });
+
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: workIntro,
+              start: "top top",
+              end: mobile ? "+=135%" : "+=155%",
+              pin: true,
+              scrub: 0.65,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          })
+            .to(eyebrow, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 0.08)
+            .to(firstWords, { x: 0, y: 0, rotationX: 0, skewX: 0, opacity: 1, filter: "blur(0px)", duration: 0.65, stagger: 0.13, ease: "power3.out" }, 0.28)
+            .to(secondWords, { x: 0, y: 0, rotationX: 0, skewX: 0, opacity: 1, filter: "blur(0px)", duration: 0.67, stagger: 0.11, ease: "power3.out" }, 1.02)
+            .to(descriptionWords, { x: 0, y: 0, opacity: 1, filter: "blur(0px)", duration: 0.35, stagger: 0.035, ease: "power2.out" }, 1.6)
+            .to({}, { duration: 0.9 }, 2.55);
         }
 
         const stage = document.querySelector<HTMLElement>("[data-project-stage]");
@@ -284,7 +306,7 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
             .fromTo(".type-track--first", { xPercent: 6 }, { xPercent: -53, duration: 4.83 }, 0)
             .fromTo(".type-track--second", { xPercent: -47 }, { xPercent: 12, duration: 4.83 }, 0)
             .to(".statement-orbit", { scale: 1.45, rotation: 85, opacity: 0.28, duration: 4.83 }, 0)
-            .to(".statement-top", { y: -24, opacity: 0.72, duration: 4.83 }, 0)
+            .to(".statement-top", { y: 0, opacity: 0.72, duration: 4.83 }, 0)
             .to(".statement-bottom", { y: 22, opacity: 0.72, duration: 4.83 }, 0);
         }
 
@@ -305,6 +327,7 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
           if (!mobile) {
             gsap.set(titleChars, { x: 0, y: 0, rotationX: 0, opacity: 1, filter: "blur(0px)" });
             gsap.set(rows, { autoAlpha: 0, xPercent: 25, scale: 0.95, rotationY: 8 });
+            gsap.set(rows[0], { autoAlpha: 1, xPercent: 0, scale: 1, rotationY: 0 });
             gsap.set(archiveCards, { autoAlpha: 0, x: 0, y: 0, scale: 1, rotation: 0, transformOrigin: "50% 50%" });
             gsap.set(finale, { autoAlpha: 0 });
             archiveCards.forEach((card, index) => gsap.set(card, { zIndex: index + 1 }));
@@ -313,7 +336,7 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
               scrollTrigger: {
                 trigger: experience,
                 start: "top top",
-                end: () => `+=${Math.max(rows.length * 145, 470)}%`,
+                end: () => `+=${Math.max(rows.length * 130, 420)}%`,
                 pin: true,
                 scrub: 0.6,
                 anticipatePin: 1,
@@ -323,22 +346,23 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
             experienceTimeline
               .to(titleChars, {
                 x: (index: number) => Math.sin(index * 1.1) * 18,
-                y: (index: number) => (index % 2 ? -1 : 1) * 48,
-                rotationX: (index: number) => index % 2 ? -60 : 60,
-                opacity: 0, filter: "blur(2px)", duration: 0.52, stagger: 0.015,
-              }, 0.6)
-              .to(".experience-heading", { y: -90, scale: 0.78, opacity: 0, duration: 0.6 }, 0.92);
+                y: (index: number) => (index % 2 ? -1 : 1) * 26,
+                rotationX: (index: number) => index % 2 ? -35 : 35,
+                opacity: 0, filter: "blur(2px)", duration: 0.45, stagger: 0.008,
+              }, 1.5)
+              .to(".experience-first-intro", { y: -28, opacity: 0, duration: 0.4 }, 1.86);
 
             rows.forEach((row, index) => {
-              const phase = 1.05 + index * 2.5;
+              const phase = index * 2.5;
               const companyChars = gsap.utils.toArray<HTMLElement>(".experience-company-char", row);
               const sourceVisual = row.querySelector<HTMLElement>(".experience-visual");
               const visualFrame = row.querySelector<HTMLElement>(".experience-visual-frame");
               const visualLayers = gsap.utils.toArray<HTMLElement>(".experience-art-layer", row);
+              if (index > 0) experienceTimeline.fromTo(row, { autoAlpha: 0, xPercent: 25, scale: 0.95, rotationY: 8 },
+                { autoAlpha: 1, xPercent: 0, scale: 1, rotationY: 0, duration: 0.68 }, phase);
               experienceTimeline
-                .fromTo(row, { autoAlpha: 0, xPercent: 25, scale: 0.95, rotationY: 8 },
-                  { autoAlpha: 1, xPercent: 0, scale: 1, rotationY: 0, duration: 0.68 }, phase)
-                .fromTo(row, { "--row-progress": 0 }, { "--row-progress": 1, duration: 1.8 }, phase)
+                .fromTo(row, { "--row-progress": 0 }, { "--row-progress": 1, duration: 1.8 }, phase);
+              if (index > 0) experienceTimeline
                 .fromTo(visualFrame, { y: 48, rotationY: -14, rotationX: 8, scale: 0.87, opacity: 0.45 },
                   { y: 0, rotationY: 0, rotationX: 0, scale: 1, opacity: 1, duration: 0.8 }, phase + 0.12)
                 .fromTo(visualLayers, { x: (layerIndex: number) => (layerIndex % 2 ? 25 : -25), y: 16, opacity: 0.4 },
@@ -351,7 +375,8 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
                 .fromTo(row.querySelectorAll(".experience-role, .experience-project, .experience-points li"),
                   { y: 13, opacity: 0.3 }, { y: 0, opacity: 1, duration: 0.43, stagger: 0.06 }, phase + 0.54)
                 .fromTo(row.querySelector(".experience-arrow"), { y: -12, rotation: -30, opacity: 0.3 },
-                  { y: 0, rotation: 0, opacity: 1, duration: 0.4 }, phase + 0.6)
+                  { y: 0, rotation: 0, opacity: 1, duration: 0.4 }, phase + 0.6);
+              experienceTimeline
                 .fromTo(archiveCards[index], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.12 }, phase + 2.03)
                 .to(sourceVisual, { opacity: 0, duration: 0.12 }, phase + 2.03)
                 .to(archiveCards[index], {
@@ -364,30 +389,59 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
                 .to(row, { autoAlpha: 0, xPercent: -20, scale: 1.04, rotationY: -5, duration: 0.6 }, phase + 2.22);
             });
             experienceTimeline
-              .fromTo(finale, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 10.95)
-              .fromTo(".experience-finale-line", { scaleX: 0 }, { scaleX: 1, duration: 0.6 }, 11.1)
-              .fromTo(".experience-finale p", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55 }, 11.12)
-              .fromTo(".experience-finale-company", { y: 34, rotationX: -32, opacity: 0, filter: "blur(5px)" }, { y: 0, rotationX: 0, opacity: 1, filter: "blur(0px)", stagger: 0.11, duration: 0.65 }, 11.28)
-              .to(finale, { opacity: 1, duration: 0.9 }, 12.05);
+              .fromTo(finale, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 9.9)
+              .fromTo(".experience-finale-line", { scaleX: 0 }, { scaleX: 1, duration: 0.6 }, 10.05)
+              .fromTo(".experience-finale p", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55 }, 10.07)
+              .fromTo(".experience-finale-company", { y: 34, rotationX: -32, opacity: 0, filter: "blur(5px)" }, { y: 0, rotationX: 0, opacity: 1, filter: "blur(0px)", stagger: 0.11, duration: 0.65 }, 10.23)
+              .to(finale, { opacity: 1, duration: 0.9 }, 11);
           } else {
-            gsap.timeline({
+            gsap.set(rows, { autoAlpha: 0, xPercent: 18, scale: 0.95 });
+            gsap.set(rows[0], { autoAlpha: 1, xPercent: 0, scale: 1 });
+            gsap.set(archiveCards, { autoAlpha: 0, x: 0, y: 0, scale: 1, rotation: 0, transformOrigin: "50% 50%" });
+            archiveCards.forEach((card, index) => gsap.set(card, { zIndex: index + 1 }));
+            const mobileExperience = gsap.timeline({
               defaults: { ease: "none" },
-              scrollTrigger: { trigger: experience, start: "top 90%", end: "top 12%", scrub: 0.6 },
-            })
-              .fromTo(titleChars, letterWave, {
-                x: 0, y: 0, rotationX: 0, opacity: 1, filter: "blur(0px)", duration: 0.4, stagger: 0.014,
-              }, 0)
-              .fromTo(".experience-heading > p", { x: 16, opacity: 0.4 }, { x: 0, opacity: 1, duration: 0.48 }, 0.3);
-            rows.forEach((row) => {
-              gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: row, start: "top 90%", end: "bottom 58%", scrub: 0.55 } })
-                .fromTo(row, { "--row-progress": 0 }, { "--row-progress": 1, duration: 1 }, 0)
-                .fromTo(row.querySelector(".experience-visual-frame"), { y: 35, scale: 0.92, opacity: 0.5 }, { y: 0, scale: 1, opacity: 1, duration: 0.6 }, 0.15)
-                .fromTo(row.querySelectorAll(".experience-art-layer"), { y: 15, opacity: 0.5 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06 }, 0.3)
-                .fromTo(gsap.utils.toArray<HTMLElement>(".experience-company-char", row), letterWave,
-                  { x: 0, y: 0, rotationX: 0, opacity: 1, filter: "blur(0px)", duration: 0.4, stagger: 0.014 }, 0.1)
-                .fromTo(row.querySelectorAll(".experience-role, .experience-project, .experience-points li"),
-                  { y: 12, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.05 }, 0.4);
+              scrollTrigger: {
+                trigger: experience,
+                start: "top top",
+                end: () => `+=${rows.length * 112}%`,
+                pin: true,
+                scrub: 0.55,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
             });
+            mobileExperience
+              .to(titleChars, { y: -16, opacity: 0, filter: "blur(2px)", duration: 0.45, stagger: 0.008 }, 1.25)
+              .to(".experience-first-intro", { y: -25, opacity: 0, duration: 0.4 }, 1.6);
+            rows.forEach((row, index) => {
+              const phase = index * 2.35;
+              const sourceVisual = row.querySelector<HTMLElement>(".experience-visual");
+              const archiveScale = 0.27 + index * 0.05;
+              if (index > 0) mobileExperience
+                .fromTo(row, { autoAlpha: 0, xPercent: 18, scale: 0.95 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.58 }, phase)
+                .fromTo(row.querySelector(".experience-visual-frame"), { y: 28, scale: 0.88, opacity: 0.55 }, { y: 0, scale: 1, opacity: 1, duration: 0.68 }, phase + 0.08)
+                .fromTo(gsap.utils.toArray<HTMLElement>(".experience-company-char", row), letterWave,
+                  { x: 0, y: 0, rotationX: 0, opacity: 1, filter: "blur(0px)", duration: 0.42, stagger: 0.012 }, phase + 0.14)
+                .fromTo(row.querySelectorAll(".experience-role, .experience-project, .experience-points li"),
+                  { y: 12, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.035 }, phase + 0.28);
+              mobileExperience.fromTo(row, { "--row-progress": 0 }, { "--row-progress": 1, duration: 1.65 }, phase);
+              mobileExperience
+                .fromTo(archiveCards[index], { autoAlpha: 0, scale: 0.88 }, { autoAlpha: 1, scale: 0.88, duration: 0.1 }, phase + 1.78)
+                .to(sourceVisual, { opacity: 0, duration: 0.13 }, phase + 1.78)
+                .to(archiveCards[index], {
+                  x: (index - (rows.length - 1) / 2) * 72,
+                  y: () => experience.clientHeight - archiveCards[index].offsetTop - archiveCards[index].offsetHeight * (1 + archiveScale) / 2 - 28,
+                  scale: archiveScale,
+                  rotation: -7 + index * 4.5,
+                  duration: 0.62,
+                }, phase + 1.84);
+              if (index < rows.length - 1) mobileExperience
+                .to(row, { autoAlpha: 0, xPercent: -17, scale: 1.03, duration: 0.48 }, phase + 2.02);
+            });
+            mobileExperience.to(rows[rows.length - 1], { opacity: 1, duration: 0.8 }, rows.length * 2.35 - 0.55)
+              .to(archiveCards, { opacity: 1, duration: 0.45 }, rows.length * 2.35 + 0.15)
+              .set(archiveCards, { opacity: 1 }, rows.length * 2.35 + 1.25);
           }
         }
 
@@ -437,65 +491,398 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
             .fromTo(".toolkit-title p", { y: 24, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.8 }, 0.22);
         }
 
-        // Secondary details follow their section's scroll position. The established
-        // pinned timelines and card choreography above remain in control of their elements.
-        const work = document.querySelector<HTMLElement>(".work");
-        if (work) {
-          gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: { trigger: work, start: "top 92%", end: "top 18%", scrub: 0.8 },
-          })
-            .fromTo(".work > .section-heading .eyebrow", { x: -24, opacity: 0.35 }, { x: 0, opacity: 1, duration: 0.48 }, 0)
-            .fromTo(".work > .section-heading h2", { y: 46, rotateX: 8, opacity: 0.45 }, { y: 0, rotateX: 0, opacity: 1, duration: 0.8 }, 0.08)
-            .fromTo(".work > .section-heading > p", { y: 25, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.58 }, 0.3);
-        }
-
         const proof = document.querySelector<HTMLElement>(".proof");
         if (proof) {
-          gsap.timeline({
+          const proofItems = gsap.utils.toArray<HTMLElement>(".proof-item", proof);
+          const proofBars = gsap.utils.toArray<HTMLElement>(".proof-chart-bar", proof);
+          const proofChart = proof.querySelector<HTMLElement>(".proof-chart");
+          const proofCursor = proof.querySelector<HTMLElement>(".proof-chart-cursor");
+          const proofTimeline = gsap.timeline({
             defaults: { ease: "none" },
-            scrollTrigger: { trigger: proof, start: "top 92%", end: "bottom 45%", scrub: 0.8 },
-          })
-            .fromTo(".proof > .eyebrow", { x: -20, opacity: 0.4 }, { x: 0, opacity: 1, duration: 0.3 }, 0)
-            .fromTo(".proof-item", { y: 46, opacity: 0.22, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.58, stagger: 0.12 }, 0.12)
-            .fromTo(".proof-item strong", { y: 15, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.12 }, 0.3);
+            scrollTrigger: {
+              trigger: proof,
+              start: "top top",
+              end: mobile ? "+=115%" : "+=145%",
+              pin: true,
+              scrub: 0.6,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+          proofTimeline.fromTo(".proof > .eyebrow", { x: -28, opacity: 0.3 }, { x: 0, opacity: 1, duration: 0.4 }, 0);
+          proofItems.forEach((item, index) => {
+            const number = item.querySelector<HTMLElement>("strong");
+            const description = item.querySelector<HTMLElement>("p");
+            if (!number) return;
+            const target = Number.parseInt(number.dataset.proofValue ?? "0", 10);
+            const counter = { value: 0 };
+            const at = 0.32 + index * 0.48;
+            proofTimeline
+              .fromTo(item, { y: 54, opacity: 0.18, rotationX: -13 }, { y: 0, opacity: 1, rotationX: 0, duration: 0.5 }, at)
+              .fromTo(number, { y: 74, scale: 0.3, rotationX: -65, opacity: 0, filter: "blur(7px)" }, {
+                y: -26, scale: 1.3, rotationX: 0, opacity: 1, filter: "blur(0px)", ease: "back.out(2.2)", duration: 0.45,
+              }, at + 0.08)
+              .to(number, { y: 0, scale: 1, ease: "elastic.out(1,0.42)", duration: 0.6 }, at + 0.53)
+              .to(counter, {
+                value: target,
+                ease: "power2.out",
+                duration: 0.58,
+                onUpdate: () => { number.textContent = `${Math.round(counter.value)}+`; },
+              }, at + 0.1);
+            if (proofBars[index]) proofTimeline.to(proofBars[index], { scaleY: 1, duration: 0.72, ease: "back.out(1.7)" }, at + 0.12);
+            if (proofCursor && proofChart) proofTimeline.to(proofCursor, { x: () => proofChart.clientWidth * (index + 0.5) / 4, opacity: 0.8, duration: 0.56, ease: "power2.inOut" }, at + 0.1);
+            if (description) proofTimeline.fromTo(description, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, at + 0.44);
+          });
+          if (proofCursor) proofTimeline.to(proofCursor, { opacity: 0, duration: 0.4 }, 3.15);
         }
 
-        const credentials = document.querySelector<HTMLElement>(".credentials");
+        const credentials = document.querySelector<HTMLElement>("[data-credentials-stage]");
         if (credentials) {
-          gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: { trigger: credentials, start: "top 90%", end: "bottom 40%", scrub: 0.8 },
-          })
-            .fromTo(".credentials-intro .eyebrow", { x: -20, opacity: 0.4 }, { x: 0, opacity: 1, duration: 0.25 }, 0)
-            .fromTo(".credentials-intro h2", { y: 38, opacity: 0.48 }, { y: 0, opacity: 1, duration: 0.45 }, 0.08)
-            .fromTo(".education", { y: 24, opacity: 0.45 }, { y: 0, opacity: 1, duration: 0.35 }, 0.25)
-            .fromTo(".credential-list a", { x: mobile ? 16 : 34, opacity: 0.35 }, { x: 0, opacity: 1, duration: 0.32, stagger: 0.09 }, 0.3);
+          const world = credentials.querySelector<HTMLElement>("[data-credentials-world]");
+          const viewport = credentials.querySelector<HTMLElement>(".credentials-viewport");
+          const documents = gsap.utils.toArray<HTMLElement>("[data-credential-doc]", credentials);
+          const records = gsap.utils.toArray<HTMLElement>("[data-credential-record]", credentials);
+          const markers = documents.map((document) => document.querySelector<HTMLElement>(".credential-inspection")).filter((marker): marker is HTMLElement => marker !== null);
+          const catalog = credentials.querySelector<HTMLElement>(".credential-catalog");
+          const education = credentials.querySelector<HTMLElement>(".credentials-education");
+          const overviewLabel = credentials.querySelector<HTMLElement>(".credentials-overview-label");
+          const headingAccent = credentials.querySelector<HTMLElement>(".credentials-intro h2 span");
+
+          if (world && viewport && documents.length === 5 && records.length === 5) {
+            const focusScale = mobile ? [1.08, 1.13, 1.18, 1.1, 1.14] : [1.48, 1.58, 1.66, 1.52, 1.6];
+            const focusRotation = [-1.1, 0.9, -0.7, 1, -0.9];
+            const focusPose = (index: number) => {
+              const document = documents[index];
+              const scale = focusScale[index];
+              return {
+                x: -(document.offsetLeft + document.offsetWidth / 2 - world.offsetWidth / 2) * scale,
+                y: -(document.offsetTop + document.offsetHeight / 2 - world.offsetHeight / 2) * scale,
+                scale,
+                rotation: focusRotation[index],
+                rotationX: index % 2 ? 0.7 : -0.7,
+              };
+            };
+            const overviewScale = () => Math.min(
+              (viewport.clientWidth / world.offsetWidth) * (mobile ? 0.94 : 0.9),
+              (viewport.clientHeight / world.offsetHeight) * (mobile ? 0.9 : 0.84),
+            );
+
+            gsap.set(world, { ...focusPose(0), transformOrigin: "50% 50%" });
+            gsap.set(documents, { opacity: (index: number) => index === 0 ? 1 : 0.44 });
+            gsap.set(markers, { opacity: (index: number) => index === 0 ? 1 : 0 });
+            gsap.set(records, { visibility: (index: number) => index === 0 ? "visible" : "hidden", clipPath: (index: number) => index === 0 ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)" });
+            gsap.set(overviewLabel, { opacity: 0 });
+
+            const archive = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: credentials,
+                start: "top top",
+                end: mobile ? "+=500%" : "+=620%",
+                pin: true,
+                scrub: 0.65,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            documents.slice(1).forEach((_, offset) => {
+              const index = offset + 1;
+              const at = index * 1.08;
+              archive.to(world, {
+                x: () => focusPose(index).x,
+                y: () => focusPose(index).y,
+                scale: focusScale[index],
+                rotation: focusRotation[index],
+                rotationX: index % 2 ? 0.7 : -0.7,
+                duration: 1.08,
+              }, at);
+              archive.to(documents, { opacity: (item: number) => item === index ? 1 : 0.44, duration: 0.46 }, at + 0.34);
+              archive.to(markers, { opacity: (item: number) => item === index ? 1 : 0, duration: 0.35 }, at + 0.34);
+              archive.to(records[index - 1], { clipPath: "inset(0% 0% 100% 0%)", y: -8, duration: 0.28 }, at + 0.27);
+              archive.set(records[index - 1], { visibility: "hidden" }, at + 0.55);
+              archive.set(records[index], { visibility: "visible", clipPath: "inset(100% 0% 0% 0%)", y: 8 }, at + 0.3);
+              archive.to(records[index], { clipPath: "inset(0% 0% 0% 0%)", y: 0, duration: 0.34 }, at + 0.36);
+            });
+
+            const overviewAt = 5.65;
+            archive.to(world, { x: 0, y: 0, scale: overviewScale, rotation: 0, rotationX: 0, duration: 0.98 }, overviewAt);
+            archive.to(documents, { opacity: 1, duration: 0.65 }, overviewAt + 0.12);
+            archive.to(markers, { opacity: 0, duration: 0.26 }, overviewAt);
+            archive.to(records[4], { clipPath: "inset(0% 0% 100% 0%)", y: -8, duration: 0.3 }, overviewAt + 0.18);
+            archive.set(records[4], { visibility: "hidden" }, overviewAt + 0.48);
+            archive.to(overviewLabel, { opacity: 1, duration: 0.36 }, overviewAt + 0.58);
+            if (education) archive.to(education, { opacity: 1, duration: 0.5 }, overviewAt + 0.55);
+            if (catalog) archive.to(catalog, { visibility: "hidden", duration: 0 }, overviewAt + 0.52);
+            if (headingAccent) archive.to(headingAccent, { x: mobile ? 5 : 14, duration: 5.9 }, 0.2);
+            archive.to(world, { x: mobile ? -12 : -35, scale: () => overviewScale() * 0.94, duration: 0.55 }, 7.4);
+          }
         }
 
-        const services = document.querySelector<HTMLElement>(".services");
+        const services = document.querySelector<HTMLElement>("[data-service-stage]");
         if (services) {
-          gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: { trigger: services, start: "top 92%", end: "top 22%", scrub: 0.8 },
-          })
-            .fromTo(".services > .section-heading .eyebrow", { x: -20, opacity: 0.42 }, { x: 0, opacity: 1, duration: 0.42 }, 0)
-            .fromTo(".services > .section-heading h2", { y: 42, opacity: 0.5 }, { y: 0, opacity: 1, duration: 0.7 }, 0.1)
-            .fromTo(".services > .section-heading > p", { y: 20, opacity: 0.42 }, { y: 0, opacity: 1, duration: 0.55 }, 0.28);
+          const lanes = gsap.utils.toArray<HTMLElement>("[data-service-lane]", services);
+          const firstHeading = services.querySelector<HTMLElement>(".service-heading-first");
+          const secondHeading = services.querySelector<HTMLElement>(".service-heading-second");
+          const firstHeadingChars = gsap.utils.toArray<HTMLElement>(".service-heading-first .service-heading-char", services);
+          const secondHeadingChars = gsap.utils.toArray<HTMLElement>(".service-heading-second .service-heading-char", services);
+          const eyebrow = services.querySelector<HTMLElement>(".section-heading .eyebrow");
+          const introduction = services.querySelector<HTMLElement>("[data-service-intro]");
+          const spine = services.querySelector<HTMLElement>("[data-service-spine]");
+          const spineNodes = gsap.utils.toArray<HTMLElement>(".service-spine i", services);
+          const handoffSvg = services.querySelector<SVGSVGElement>("[data-service-handoff]");
+          const handoffPaths = gsap.utils.toArray<SVGPathElement>("[data-service-handoff-path]", services);
+
+          if (lanes.length === 3 && spine) {
+            const drawHandoff = () => {
+              if (!handoffSvg || handoffPaths.length !== 4) return;
+              const bounds = services.getBoundingClientRect();
+              const width = services.clientWidth;
+              const height = services.clientHeight;
+              const destinationX = width * 0.83;
+              const destinationY = height * 0.91;
+              handoffSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+              lanes.forEach((lane, index) => {
+                const route = lane.querySelector<HTMLElement>(".service-route");
+                if (!route) return;
+                const routeBounds = route.getBoundingClientRect();
+                const x = routeBounds.right - bounds.left;
+                const y = routeBounds.top - bounds.top + routeBounds.height / 2;
+                handoffPaths[index].setAttribute("d", `M ${x} ${y} C ${x - 18} ${y + (destinationY - y) * 0.52}, ${destinationX + 32} ${destinationY - 26}, ${destinationX} ${destinationY}`);
+              });
+              handoffPaths[3].setAttribute("d", `M ${destinationX} ${destinationY} V ${height}`);
+              handoffPaths.forEach((path) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = `${length}`;
+                path.style.strokeDashoffset = `${length}`;
+              });
+            };
+            drawHandoff();
+            const allTitles = lanes.map((lane) => lane.querySelector<HTMLElement>("h3")).filter((title): title is HTMLElement => title !== null);
+            const allFrames = lanes.map((lane) => lane.querySelector<HTMLElement>(".service-artifact-frame")).filter((frame): frame is HTMLElement => frame !== null);
+            const allBlocks = gsap.utils.toArray<SVGRectElement>(".service-artifact-block", services);
+            const allPaths = gsap.utils.toArray<SVGPathElement>(".service-artifact-line", services);
+            gsap.set(eyebrow, { autoAlpha: 0, y: -18, letterSpacing: ".35em" });
+            gsap.set(firstHeading, { autoAlpha: 0 });
+            gsap.set(secondHeading, { autoAlpha: 0 });
+            gsap.set(firstHeadingChars, { autoAlpha: 0, x: (index: number) => -50 - index * 7, y: (index: number) => Math.sin(index * 0.8) * 42, rotationY: -65, rotationZ: -12, scale: 0.62, filter: "blur(9px)" });
+            gsap.set(secondHeadingChars, { autoAlpha: 0, x: (index: number) => 55 + index * 6, y: (index: number) => Math.cos(index * 0.8) * 46, rotationY: 65, rotationZ: 11, scale: 0.62, filter: "blur(9px)" });
+            gsap.set(introduction, { autoAlpha: 0, y: 22, clipPath: "inset(100% 0 0 0)" });
+            lanes.forEach((lane) => {
+              gsap.set(lane.querySelector(".service-lane-index"), { autoAlpha: 0, y: 14 });
+              gsap.set(lane.querySelector("h3"), { autoAlpha: 0, x: -48, y: 16, skewX: -9, clipPath: "inset(0 100% 0 0)" });
+              gsap.set(lane.querySelector("p"), { autoAlpha: 0, x: 30, y: 15, clipPath: "inset(0 0 100% 0)" });
+              gsap.set(lane.querySelectorAll(".service-lane-word"), { autoAlpha: 0, y: 32, rotationX: -70, filter: "blur(7px)" });
+              gsap.set(lane.querySelectorAll(".service-description-word"), { autoAlpha: 0, y: 12, filter: "blur(4px)" });
+              gsap.set(lane.querySelector(".service-artifact-frame"), { autoAlpha: 0, scale: 0.84, y: 18, transformOrigin: "center center" });
+            });
+            gsap.set(allPaths, {
+              strokeDasharray: (_: number, path: SVGPathElement) => path.getTotalLength(),
+              strokeDashoffset: (_: number, path: SVGPathElement) => path.getTotalLength(),
+            });
+            gsap.set(allBlocks, { opacity: 0, scale: 0.65, transformOrigin: "50% 50%" });
+            gsap.set(spine, { scaleY: 0, transformOrigin: "top center" });
+            gsap.set(spineNodes, { opacity: 0 });
+
+            const pipeline = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: services,
+                start: "top top",
+                end: mobile ? "+=220%" : "+=260%",
+                pin: true,
+                scrub: 0.55,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            pipeline
+              .to(eyebrow, { autoAlpha: 1, y: 0, letterSpacing: ".14em", duration: 0.35, ease: "power2.out" }, 0.1)
+              .to(firstHeading, { autoAlpha: 1, duration: 0.08 }, 0.28)
+              .to(firstHeadingChars, { autoAlpha: 1, x: 0, y: 0, rotationY: 0, rotationZ: 0, scale: 1, filter: "blur(0px)", duration: 0.65, stagger: 0.055, ease: "back.out(1.8)" }, 0.3)
+              .to(secondHeading, { autoAlpha: 1, duration: 0.08 }, 0.78)
+              .to(secondHeadingChars, { autoAlpha: 1, x: 0, y: 0, rotationY: 0, rotationZ: 0, scale: 1, filter: "blur(0px)", duration: 0.65, stagger: 0.055, ease: "back.out(1.8)" }, 0.8)
+              .to(introduction, { autoAlpha: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 0.56, ease: "power2.out" }, 1.0);
+
+            lanes.forEach((lane, index) => {
+              const at = 1.5 + index * 1.95;
+              const title = lane.querySelector<HTMLElement>("h3");
+              const description = lane.querySelector<HTMLElement>("p");
+              const route = lane.querySelector<HTMLElement>(".service-route");
+              const routeLine = lane.querySelector<HTMLElement>("[data-service-route-line]");
+              const signal = lane.querySelector<HTMLElement>("[data-service-signal]");
+              const nodes = gsap.utils.toArray<HTMLElement>("[data-service-node]", lane);
+              const paths = gsap.utils.toArray<SVGPathElement>(".service-artifact-line", lane);
+              const blocks = gsap.utils.toArray<SVGRectElement>(".service-artifact-block", lane);
+              const frame = lane.querySelector<HTMLElement>(".service-artifact-frame");
+              const laneIndex = lane.querySelector<HTMLElement>(".service-lane-index");
+              const titleWords = gsap.utils.toArray<HTMLElement>(".service-lane-word", lane);
+              const descriptionWords = gsap.utils.toArray<HTMLElement>(".service-description-word", lane);
+
+              if (index > 0) pipeline.to(lanes[index - 1].querySelector("h3"), { color: "#4d6257", x: 0, duration: 0.35 }, at);
+              pipeline
+                .to(laneIndex, { autoAlpha: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, at)
+                .to(title, { autoAlpha: 1, color: "#171d1a", x: mobile ? 2 : 8, y: 0, skewX: 0, clipPath: "inset(0 0% 0 0)", letterSpacing: "-.06em", duration: 0.28, ease: "power3.out" }, at + 0.08)
+                .to(titleWords, { autoAlpha: 1, y: 0, rotationX: 0, filter: "blur(0px)", duration: 0.52, stagger: 0.08, ease: "back.out(2)" }, at + 0.14)
+                .to(description, { autoAlpha: 1, color: "#34433a", x: 0, y: 0, clipPath: "inset(0 0 0% 0)", duration: 0.26, ease: "power2.out" }, at + 0.35)
+                .to(descriptionWords, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.34, stagger: 0.022, ease: "power2.out" }, at + 0.41)
+                .to(frame, { autoAlpha: 1, scale: 1, y: 0, duration: 0.52, ease: "back.out(1.5)" }, at + 0.43)
+                .to(routeLine, { scaleX: 1, duration: 1.02 }, at + 0.12)
+                .fromTo(signal, { opacity: 0, x: 0 }, { opacity: 1, x: () => Math.max(0, (route?.clientWidth ?? 0) - 7), duration: 1.02 }, at + 0.12)
+                .to(nodes, { borderColor: "#3348c5", backgroundColor: "#3348c5", duration: 0.18, stagger: 0.23 }, at + 0.2)
+                .to(paths, { strokeDashoffset: 0, duration: mobile ? 0.72 : 0.88, stagger: mobile ? 0.04 : 0.07 }, at + 0.32)
+                .to(blocks, { scale: 1, opacity: 0.8, duration: 0.32, stagger: 0.1 }, at + 0.72)
+                .to(frame, { borderColor: "#536f9e8a", duration: 0.32 }, at + 0.78)
+                .to(signal, { opacity: 0, duration: 0.18 }, at + 1.27);
+              if (introduction) pipeline.to(introduction, { color: ["#4c5d53", "#354b43", "#263e43"][index], duration: 0.45 }, at);
+              if (index === 1) {
+                pipeline.to(firstHeading, { color: "#55645b", duration: 0.55 }, at)
+                  .to(secondHeading, { color: "#34443b", duration: 0.55 }, at);
+              }
+              if (index === 2) pipeline.to(secondHeading, { color: "#202725", duration: 0.55 }, at);
+            });
+
+            pipeline
+              .to(allTitles, { color: "#202725", x: 0, duration: 0.54 }, 7.45)
+              .to(allFrames, { borderColor: "#536f9e8a", duration: 0.54 }, 7.45)
+              .to(allBlocks, { opacity: 0.88, duration: 0.54 }, 7.45)
+              .to(firstHeading, { color: "#202725", duration: 0.54 }, 7.45)
+              .to(spine, { scaleY: 1, duration: 0.74 }, 7.5)
+              .to(spineNodes, { opacity: 1, duration: 0.14, stagger: 0.22 }, 7.63)
+              .to(spine, { scaleY: 1.13, duration: 0.4 }, 9.6)
+              .to(handoffPaths.slice(0, 3), { strokeDashoffset: 0, duration: 0.88, stagger: 0.12 }, 9.54)
+              .to(handoffPaths[3], { strokeDashoffset: 0, duration: 0.38 }, 10.35);
+          }
         }
 
-        const contact = document.querySelector<HTMLElement>(".contact");
+        const contact = document.querySelector<HTMLElement>("[data-contact-stage]");
+        let cleanupContact = () => {};
         if (contact) {
-          gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: { trigger: contact, start: "top 90%", end: "bottom bottom", scrub: 0.8 },
-          })
-            .fromTo(".contact-top", { y: 18, opacity: 0.48 }, { y: 0, opacity: 1, duration: 0.32 }, 0)
-            .fromTo(".contact-bottom", { y: 30, opacity: 0.42 }, { y: 0, opacity: 1, duration: 0.4 }, 0.34)
-            .fromTo(".contact footer", { y: 18, opacity: 0.45 }, { y: 0, opacity: 1, duration: 0.32 }, 0.66);
+          const darkField = contact.querySelector<HTMLElement>("[data-contact-dark]");
+          const signalSvg = contact.querySelector<SVGSVGElement>("[data-contact-signal]");
+          const signalPath = contact.querySelector<SVGPathElement>("[data-contact-signal-path]");
+          const lines = gsap.utils.toArray<HTMLElement>("[data-contact-line]", contact);
+          const glyphLines = lines.map((line) => gsap.utils.toArray<HTMLElement>("[data-contact-glyph]", line));
+          const rule = contact.querySelector<HTMLElement>("[data-contact-handoff-rule]");
+          const links = gsap.utils.toArray<HTMLElement>("[data-contact-activate]", contact);
+          const footer = contact.querySelector<HTMLElement>("[data-contact-footer]");
+          const back = contact.querySelector<HTMLAnchorElement>("[data-contact-back]");
+          const headline = contact.querySelector<HTMLElement>(".contact-headline");
+          const label = contact.querySelector<HTMLElement>("[data-contact-top]");
+
+          if (darkField && signalSvg && signalPath && lines.length === 4 && rule && footer && headline) {
+            const drawContactSignal = () => {
+              const width = contact.clientWidth;
+              const height = contact.clientHeight;
+              signalSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+              signalPath.setAttribute("d", `M ${width * 0.955} 0 C ${width * 0.91} ${height * 0.16}, ${width * 0.99} ${height * 0.28}, ${width * 0.945} ${height * 0.42} S ${width * 0.975} ${height * 0.56}, ${width * 0.94} ${height * 0.69}`);
+              const length = signalPath.getTotalLength();
+              signalPath.style.strokeDasharray = `${length}`;
+              signalPath.style.strokeDashoffset = `${length}`;
+            };
+            drawContactSignal();
+            glyphLines.forEach((lineGlyphs, lineIndex) => gsap.set(lineGlyphs, {
+              x: (glyphIndex: number) => -(mobile ? 90 : 210) - glyphIndex * (mobile ? 7 : 13),
+              y: (glyphIndex: number) => Math.sin(glyphIndex * 0.72 + lineIndex * 0.8) * (mobile ? 42 : 82) + 26,
+              z: -130,
+              rotation: (glyphIndex: number) => Math.sin(glyphIndex * 0.72 + lineIndex) * 32,
+              rotationY: (glyphIndex: number) => Math.cos(glyphIndex * 0.72 + lineIndex) * 42,
+              skewX: -12,
+              scale: 0.62,
+              opacity: 0,
+              filter: "blur(11px)",
+              transformOrigin: "50% 70%",
+            }));
+            let pointerActive = false;
+            const contactTimeline = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: contact,
+                start: "top top",
+                end: mobile ? "+=180%" : "+=210%",
+                pin: true,
+                scrub: 0.55,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                  pointerActive = self.progress >= 0.82;
+                  contact.dataset.darkReady = self.progress >= 0.13 ? "true" : "false";
+                },
+              },
+            });
+            contactTimeline
+              .to(darkField, { clipPath: "circle(165% at 83% 0%)", duration: 1.8 }, 0)
+              .to(signalPath, { strokeDashoffset: 0, duration: 8.8 }, 0.3)
+              .to(label, { clipPath: "inset(0 0% 0 0)", duration: 0.35 }, 1.3)
+              .to(rule, { scaleX: 1, duration: 0.68 }, 8.15);
+            glyphLines.forEach((lineGlyphs, index) => {
+              const revealAt = [1.75, 3.35, 4.95, 6.55][index];
+              contactTimeline.to(lineGlyphs, {
+                x: (glyphIndex: number) => Math.sin(glyphIndex * 0.72 + index * 0.8) * (mobile ? 10 : 22),
+                y: (glyphIndex: number) => -Math.cos(glyphIndex * 0.72 + index * 0.8) * (mobile ? 16 : 30),
+                z: 26,
+                rotation: (glyphIndex: number) => Math.sin(glyphIndex * 0.72 + index) * -9,
+                rotationY: (glyphIndex: number) => Math.cos(glyphIndex * 0.72 + index) * -12,
+                skewX: 4,
+                scale: 1.12,
+                opacity: 1,
+                filter: "blur(0px)",
+                ease: "power3.out",
+                duration: 0.78,
+                stagger: 0.075,
+              }, revealAt).to(lineGlyphs, {
+                x: 0,
+                y: 0,
+                z: 0,
+                rotation: 0,
+                rotationY: 0,
+                skewX: 0,
+                scale: 1,
+                ease: "sine.inOut",
+                duration: 0.54,
+                stagger: 0.075,
+              }, revealAt + 0.78);
+            });
+            if (links[0]) contactTimeline.to(links[0].querySelectorAll("svg, span"), { clipPath: "inset(0 0% 0 0)", duration: 0.34 }, 8.32);
+            if (links[1]) contactTimeline.to(links[1].querySelectorAll("svg, span"), { clipPath: "inset(0 0% 0 0)", duration: 0.34 }, 8.52);
+            if (links[2]) contactTimeline.to(links[2].querySelectorAll("svg, span"), { clipPath: "inset(0 0% 0 0)", duration: 0.34 }, 8.72);
+            contactTimeline
+              .to(footer, { clipPath: "inset(0 0% 0 0)", duration: 0.32 }, 8.92)
+              .to(headline, { y: -5, duration: 0.28 }, 9.72)
+              .to(back, { color: "#f0eee5", duration: 0.28 }, 9.72);
+
+            const onPointerMove = (event: PointerEvent) => {
+              if (!pointerActive || mobile) return;
+              lines.forEach((line, index) => {
+                const bounds = line.getBoundingClientRect();
+                const dx = Math.max(-4, Math.min(4, (event.clientX - (bounds.left + bounds.width / 2)) / 110));
+                const dy = Math.max(-2, Math.min(2, (event.clientY - (bounds.top + bounds.height / 2)) / 180));
+                gsap.to(line, { x: dx * (index % 2 ? -1 : 1), y: dy, duration: 0.26, overwrite: true });
+              });
+            };
+            const onPointerLeave = () => gsap.to(lines, { x: 0, y: 0, duration: 0.3, overwrite: true });
+            const onBackToTop = (event: MouseEvent) => {
+              event.preventDefault();
+              if (window.portfolioLenis) window.portfolioLenis.scrollTo(0, { duration: 1.25 });
+              else window.scrollTo({ top: 0, behavior: "smooth" });
+            };
+            if (!mobile) {
+              contact.addEventListener("pointermove", onPointerMove);
+              contact.addEventListener("pointerleave", onPointerLeave);
+            }
+            back?.addEventListener("click", onBackToTop);
+            cleanupContact = () => {
+              delete contact.dataset.darkReady;
+              contact.removeEventListener("pointermove", onPointerMove);
+              contact.removeEventListener("pointerleave", onPointerLeave);
+              back?.removeEventListener("click", onBackToTop);
+              gsap.killTweensOf(lines);
+            };
+          }
         }
 
-        gsap.utils.toArray<HTMLElement>(".archive-project, .service-rows article").forEach((row, index) => {
+        gsap.utils.toArray<HTMLElement>(".archive-project").forEach((row, index) => {
           gsap.fromTo(row, { x: index % 2 ? 36 : -36, opacity: 0.55 }, {
             x: 0,
             opacity: 1,
@@ -504,14 +891,8 @@ export default function ScrollChoreography({ language }: { language: "vi" | "en"
           });
         });
 
-        gsap.fromTo(".contact h2", { y: 90, scale: 0.9 }, {
-          y: -22,
-          scale: 1,
-          ease: "none",
-          scrollTrigger: { trigger: ".contact", start: "top bottom", end: "center center", scrub: true },
-        });
-
         requestAnimationFrame(() => ScrollTrigger.refresh());
+        return cleanupContact;
       }
     );
 

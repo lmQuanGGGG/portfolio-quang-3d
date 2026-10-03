@@ -1,19 +1,7 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="b" x1="25" y1="20" x2="232" y2="239" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#10182E"/>
-      <stop offset="1" stop-color="#030712"/>
-    </linearGradient>
-    <linearGradient id="a" x1="66" y1="68" x2="189" y2="186" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A5B4FC"/>
-      <stop offset=".48" stop-color="#818CF8"/>
-      <stop offset="1" stop-color="#2DD4BF"/>
-    </linearGradient>
-  </defs>
-  <rect x="12" y="12" width="232" height="232" rx="72" fill="url(#b)"/>
-  <rect x="13" y="13" width="230" height="230" rx="71" stroke="white" stroke-opacity=".14" stroke-width="2"/>
-  <path d="M66 103L94 128L66 153" stroke="url(#a)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M190 103L162 128L190 153" stroke="url(#a)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M145 80L111 176" stroke="white" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="193" cy="63" r="10" fill="#2DD4BF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Le Minh Quang — Q monogram</title>
+  <rect width="64" height="64" rx="17" fill="#171B24"/>
+  <rect x=".75" y=".75" width="62.5" height="62.5" rx="16.25" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="1.5"/>
+  <circle cx="30" cy="29" r="16" stroke="#F5F4EF" stroke-width="7.5"/>
+  <path d="M37 37 49 49" stroke="#8597FF" stroke-width="8" stroke-linecap="round"/>
 </svg>
